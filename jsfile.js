@@ -208,3 +208,60 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCountdown();
     setInterval(updateCountdown, 1000);
   });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Only show landing page on mobile devices
+    if (window.innerWidth < 769) {
+      const landingPage = document.getElementById('mobile-landing');
+      const mainContent = document.body;
+      let startY, endY;
+      
+      // Show the landing page
+      landingPage.style.display = 'block';
+      
+      // Prevent scrolling on main content while landing page is visible
+      document.body.style.overflow = 'hidden';
+      
+      // Handle touch events for swipe up detection
+      landingPage.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      
+      landingPage.addEventListener('touchend', function(e) {
+        endY = e.changedTouches[0].clientY;
+        handleSwipe();
+      }, { passive: true });
+      
+      landingPage.addEventListener('touchmove', function(e) {
+        // Prevent default to avoid page scroll during swipe
+        e.preventDefault();
+      }, { passive: false });
+      
+      function handleSwipe() {
+        const threshold = 50; // Minimum distance to be considered a swipe
+        
+        if (startY - endY > threshold) {
+          // User swiped up
+          hideLandingPage();
+        }
+      }
+      
+      function hideLandingPage() {
+        // Add a fade out animation
+        landingPage.style.transition = 'opacity 0.5s ease-out';
+        landingPage.style.opacity = '0';
+        
+        // After animation, hide the landing page
+        setTimeout(function() {
+          landingPage.style.display = 'none';
+          document.body.style.overflow = 'auto'; // Enable scrolling on main content
+        }, 500);
+      }
+      
+      // Also add click functionality as a fallback
+      landingPage.addEventListener('click', function() {
+        hideLandingPage();
+      });
+    }
+  });

@@ -546,3 +546,111 @@ body {
     font-size: 1rem;
   }
 }
+
+/* Mobile Landing Page Styles */
+.mobile-landing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  display: none; /* Hidden by default, will be shown via JS for mobile only */
+  overflow: hidden;
+}
+
+.mobile-landing-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.landing-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('雄鹰领导力mobile背景.png'); /* Use your image filename */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.landing-text-container {
+  position: relative;
+  padding: 0 20px 40px;
+  z-index: 2;
+  text-align: center;
+}
+
+.landing-text {
+  color: #004080;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.swipe-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.swipe-arrow {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.swipe-arrow::before,
+.swipe-arrow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-top: 2px solid #004080;
+  border-left: 2px solid #004080;
+  transform: translate(-50%, 0) rotate(45deg);
+}
+
+.swipe-arrow::after {
+  top: 8px;
+}
+
+.swipe-text {
+  color: #004080;
+  font-size: 14px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Disable on desktop */
+@media (min-width: 769px) {
+  .mobile-landing {
+    display: none !important;
+  }
+}
