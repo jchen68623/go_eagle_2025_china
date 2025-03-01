@@ -143,3 +143,406 @@ body {
     margin-bottom: 5px;
   }
 }
+
+/* Speakers Section */
+.speakers-section {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.speakers-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.speakers-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Speaker Carousel */
+.speaker-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  width: 100%;
+}
+
+/* Content Wrapper - Controls width and overflow */
+.speaker-content-wrapper {
+  width: 90%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+}
+
+/* Speaker Slides Container */
+.speaker-slides {
+  display: flex;
+  transition: transform 0.5s ease;
+  width: 100%;
+}
+
+/* Individual Speaker Slide */
+.speaker-slide {
+  min-width: 100%;
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Speaker Image */
+.speaker-image {
+  width: 100%;
+  overflow: hidden;
+}
+
+.speaker-image img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Speaker Info Block */
+.speaker-info {
+  padding: 20px;
+  background: #f9f9f9;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.speaker-info h3 {
+  font-size: 1.4em;
+  color: #004080;
+  margin-bottom: 5px;
+}
+
+.speaker-title {
+  font-weight: bold;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.speaker-bio {
+  line-height: 1.5;
+  color: #444;
+}
+
+/* Navigation Arrows */
+.nav-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 5;
+  transition: background 0.3s ease;
+}
+
+.nav-arrow:hover {
+  background: #fff;
+}
+
+.nav-arrow span {
+  color: #004080;
+}
+
+.prev-arrow {
+  margin-right: 10px;
+}
+
+.next-arrow {
+  margin-left: 10px;
+}
+
+/* Indicator Dots */
+.speaker-indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 6px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicator.active {
+  background-color: #004080;
+}
+
+/* Desktop Layout */
+@media (min-width: 769px) {
+  .speaker-slide {
+    flex-direction: row;
+    max-height: 400px;
+  }
+  
+  .speaker-image {
+    width: 65%;
+    height: 400px;
+  }
+  
+  .speaker-image img {
+    height: 100%;
+    object-position: center;
+  }
+  
+  .speaker-info {
+    width: 35%;
+  }
+  
+  .speaker-bio {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+  
+  .nav-arrow {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+  
+  /* Hide View More button on desktop */
+  .view-more-btn {
+    display: none;
+  }
+}
+
+/* Tablet Layout */
+@media (min-width: 481px) and (max-width: 768px) {
+  .speaker-image {
+    height: 350px;
+  }
+  
+  .speaker-image img {
+    height: 100%;
+    object-position: center 20%;
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 480px) {
+  .speaker-content-wrapper {
+    width: 85%;
+  }
+  
+  .speaker-image {
+    height: 220px;
+  }
+  
+  .speaker-bio {
+    position: relative;
+    max-height: 4.5em;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .speaker-bio.collapsed {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .speaker-bio.expanded {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  .view-more-btn {
+    display: inline-block;
+    margin-top: 5px;
+    color: #004080;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  .nav-arrow {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Countdown Section */
+.countdown-section {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.countdown-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.countdown-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 25px;
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+  color: #004080;
+}
+
+/* Countdown Timer */
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.countdown-value {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #004080 0%, #0080c0 100%);
+  color: white;
+  border-radius: 10px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 64, 128, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-value::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 50px 0 rgba(0, 0, 0, 0.15);
+}
+
+.countdown-label {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.countdown-label .cn {
+  font-size: 1.2rem;
+  color: #004080;
+}
+
+.countdown-label .en {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.countdown-separator {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #004080;
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+}
+
+/* Event Date and Time */
+.timezone-note {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Animation for digit change */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 0.5s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .countdown-value {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
+  
+  .countdown-separator {
+    font-size: 2rem;
+    height: 80px;
+  }
+  
+  .countdown-label .cn {
+    font-size: 1rem;
+  }
+  
+  .countdown-label .en {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-value {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+  }
+  
+  .countdown-separator {
+    font-size: 1.5rem;
+    height: 60px;
+    margin: 0 2px;
+  }
+  
+  .countdown-unit {
+    margin: 0 5px;
+  }
+  
+  .event-date, .event-time {
+    font-size: 1rem;
+  }
+}

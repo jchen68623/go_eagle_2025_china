@@ -6,6 +6,7 @@
   <title>做雄鹰领导力 - 活动日程</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+<script src="jsfile.js"></script>
 <body>
 
   <!-- Full-Width Banner at the Top -->
@@ -60,8 +61,87 @@
     </div>
   </section>
 
+  <!-- Speakers Showcase Section -->
+  <section class="speakers-section">
+    <div class="speakers-container">
+      <h2>演讲嘉宾</h2>
+      
+      <div class="speaker-carousel">
+        <!-- Left Navigation Arrow -->
+        <button class="nav-arrow prev-arrow" id="prevSpeaker">
+          <span>&#10094;</span>
+        </button>
+        
+        <!-- Speakers Content -->
+        <div class="speaker-content-wrapper">
+          <div class="speaker-slides" id="speakerSlides">
+            <!-- Speaker 1 -->
+            <div class="speaker-slide">
+              <div class="speaker-image">
+                <img src="Kyle_Lauren.jpeg" alt="Kyle_Lauren">
+              </div>
+              <div class="speaker-info">
+                <h3>Kyle & Lauren Wilz</h3>
+                <div class="bio-container">
+                  <p class="speaker-bio collapsed">
+                    Kyle has a background in civil engineering and project management and is currently working part-time. 
+                    Lauren has a degree in English and was able to leave her corporate writing career in 2017 because of the business they built. Today she spends most of her time with their 5 year old daughter Addie during the day while empowering the next wave of entrepreneurs at night.</p>
+                  <span class="view-more-btn">查看更多</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Speaker 2 -->
+            <div class="speaker-slide">
+              <div class="speaker-image">
+                <img src="Jerry_Leann.jpeg" alt="Jerry_Leann">
+              </div>
+              <div class="speaker-info">
+                <h3>Jerry Tan & Leann Ren</h3>
+                <div class="bio-container">
+                  <p class="speaker-bio collapsed">
+                    Jerry is a banking industry director, while Leann transitioned from her data analyst role in her mid-20s due to business pursuits. 
+                    Having built a global enterprise, they now split their time between China and the US giving back and coaching others on how to create similar choice and options in their lives.</p>
+                  <span class="view-more-btn">查看更多</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Speaker 3 -->
+            <div class="speaker-slide">
+              <div class="speaker-image">
+                <img src="RamosChen.jpg" alt="RamosChen">
+              </div>
+              <div class="speaker-info">
+                <h3>Ramos Chen</h3>
+                <div class="bio-container">
+                  <p class="speaker-bio collapsed">
+                  </p>
+                  <span class="view-more-btn">查看更多</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Navigation Arrow -->
+        <button class="nav-arrow next-arrow" id="nextSpeaker">
+          <span>&#10095;</span>
+        </button>
+      </div>
+      
+      <!-- Indicator Dots -->
+      <div class="speaker-indicators">
+        <span class="indicator active" data-index="0"></span>
+        <span class="indicator" data-index="1"></span>
+        <span class="indicator" data-index="2"></span>
+        <span class="indicator" data-index="3"></span>
+      </div>
+    </div>
+  </section>
+
   <!-- Detailed Schedule Section -->
-  <section class="details-section">
+  <!-- <section class="details-section">
     <div class="details-container">
       <h2>星期六详细日程</h2>
 
@@ -249,7 +329,56 @@
       </div>
 
     </div>
-  </section>
+  </section> -->
 
+
+  <!-- Countdown Section -->
+  <section class="countdown-section">
+    <div class="countdown-container">
+      <h2>活动倒计时 | Event Countdown</h2>
+      
+      <div class="countdown-timer">
+        <div class="countdown-unit">
+          <div class="countdown-value" id="countdown-days">00</div>
+          <div class="countdown-label">
+            <span class="cn">天</span>
+            <span class="en">Days</span>
+          </div>
+        </div>
+        
+        <div class="countdown-separator">:</div>
+        
+        <div class="countdown-unit">
+          <div class="countdown-value" id="countdown-hours">00</div>
+          <div class="countdown-label">
+            <span class="cn">时</span>
+            <span class="en">Hours</span>
+          </div>
+        </div>
+        
+        <div class="countdown-separator">:</div>
+        
+        <div class="countdown-unit">
+          <div class="countdown-value" id="countdown-minutes">00</div>
+          <div class="countdown-label">
+            <span class="cn">分</span>
+            <span class="en">Minutes</span>
+          </div>
+        </div>
+        
+        <div class="countdown-separator">:</div>
+        
+        <div class="countdown-unit">
+          <div class="countdown-value" id="countdown-seconds">00</div>
+          <div class="countdown-label">
+            <span class="cn">秒</span>
+            <span class="en">Seconds</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="timezone-note" id="user-timezone"></div>
+    </div>
+  </section>
 </body>
 </html>
