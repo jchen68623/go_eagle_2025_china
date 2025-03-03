@@ -19,113 +19,196 @@ body {
   width: 100%;
   height: auto;
 }
-/* Overview Section */
+/* Redesigned Overview Section */
 .overview-section {
   max-width: 1000px;
   margin: 20px auto;
-  background: #fff;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background: linear-gradient(139.40deg, rgba(141, 189, 208, 0.8) 1.605%, rgba(215, 235, 246, 0.8) 96.925%);
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: #fff;
 }
-.overview-container {
-  width: 100%;
-  margin: 0 auto;
-}
+
 .overview-section h2 {
-  font-size: 1.8em;
-  margin-bottom: 25px;
-  text-align: center;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px;
-}
-/* New flex layout for days */
-.days-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
-.overview-day {
-  flex: 1;
-  min-width: 280px;
+  font-size: 2.2em;
   margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-.overview-day h3 {
-  font-size: 1.3em;
-  color: #004080;
-  margin-bottom: 15px;
-  text-align: center;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #eaeaea;
-}
-.overview-day p {
-  margin-bottom: 10px;
-}
-.overview-day ul {
-  list-style-type: disc;
-  margin-left: 20px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-.overview-day li {
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-/* Detailed Schedule Section */
-.details-section {
-  max-width: 1000px;
-  margin: 20px auto;
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.details-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-.details-section h2 {
-  font-size: 1.8em;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 5px;
-}
-.schedule-item {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #eee;
-  padding: 15px 0;
-}
-.schedule-item:last-child {
+  text-align: left;
   border-bottom: none;
+  padding-bottom: 0;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 64, 128, 0.2);
+  font-weight: 600;
 }
-.time {
-  width: 25%;
-  min-width: 120px;
-  font-weight: bold;
-  color: #004080;
+
+.overview-section h2.mobile-title {
+  display: none;
+}
+
+.overview-section .subtitle {
+  font-size: 1.2em;
+  font-weight: normal;
+  margin-top: 5px;
+  display: block;
+}
+
+/* Day entries */
+.schedule-day {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.day-header {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
-  padding-right: 20px;
 }
-.details {
-  width: 75%;
+
+.day-date {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 10px;
 }
-.details h3 {
+
+.day-name {
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.day-activities {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-left: 0;
+  list-style-type: none;
+  color: #fff;
+}
+
+.day-activities li {
   margin-bottom: 8px;
+  padding-left: 10px;
+}
+
+/* Time blocks */
+.time-block {
+  margin-bottom: 20px;
+}
+
+.time-block-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.time-block-icon {
+  margin-right: 10px;
   font-size: 1.1em;
+  color: #fff;
 }
-.details ul {
-  list-style-type: disc;
+
+.time-block-title {
+  font-weight: 500;
+  font-size: 1.1em;
+  color: #fff;
+}
+
+.time-block-time {
+  color: rgba(255, 255, 255, 0.9);
+  margin-left: 5px;
+}
+
+.time-block-details {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-left: 25px;
+  margin-bottom: 15px;
+}
+
+.time-block-details ul {
+  list-style-type: none;
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
 }
-.details ul li {
-  margin-bottom: 5px;
+
+.time-block-details li {
+  margin-bottom: 8px;
+  color: #fff;
+  position: relative;
+  padding-left: 0;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 0;
+  top: 2px;
+  font-size: 1.2em;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.rotate-icon {
+  transform: rotate(180deg);
+}
+
+/* Accordion functionality */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content.active {
+  max-height: 500px;
+}
+
+/* Desktop overrides */
+@media (min-width: 769px) {
+  .overview-section {
+    padding: 30px;
+  }
+  
+  .overview-section h2 {
+    font-size: 2.4em;
+    margin-bottom: 30px;
+  }
+  
+  .desktop-layout {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .schedule-day {
+    flex: 0 0 calc(33.33% - 20px);
+    margin-right: 20px;
+  }
+  
+  .schedule-day:last-child {
+    margin-right: 0;
+  }
+  
+  .time-block-details {
+    margin-left: 30px;
+  }
+}
+
+/* Mobile specific */
+@media (max-width: 768px) {
+  .overview-section h2.desktop-title {
+    display: none;
+  }
+  
+  .overview-section h2.mobile-title {
+    display: block;
+    font-size: 1.8em;
+  }
+  
+  .time-block-details {
+    font-size: 0.95em;
+  }
 }
 
 /* Responsive adjustments */
