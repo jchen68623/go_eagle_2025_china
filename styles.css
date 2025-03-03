@@ -7,7 +7,7 @@
 
 body {
   position: relative;
-  background-color: transparent; /* Make sure body has no background color */
+  background-color: transparent;
 }
 
 /* Lower layer - the image background */
@@ -18,10 +18,10 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('assets/blue-swirl-background.png'); /* Update with your image path */
+  background-image: url('assets/blue-swirl-background.png');
   background-size: cover;
   background-position: center;
-  z-index: -2; /* Place it below the gradient */
+  z-index: -2;
 }
 
 /* Top layer - the gradient overlay */
@@ -33,8 +33,9 @@ body::after {
   width: 100%;
   height: 100%;
   background: linear-gradient(139.40deg, rgba(141, 189, 208, 0.8) 1.594%, rgba(215, 235, 246, 0.8) 96.93%);
-  z-index: -1; /* Place it above the image but below content */
+  z-index: -1;
 }
+
 /* Common Section Styles */
 section {
   max-width: 1000px;
@@ -64,7 +65,7 @@ section h2 .subtitle {
 }
 
 .under-line {
-  color: rgb(107, 152, 191); /* Match the heading color */
+  color: rgb(107, 152, 191);
   font-weight: bold;
   cursor: pointer;
   font-size: 0.9em;
@@ -199,14 +200,17 @@ section h2 .subtitle {
   padding-bottom: 0;
 }
 
-/* Speaker Card Updated Colors */
+/* Speaker Card */
 .speaker-card {
-  background: white; /* Change from semi-transparent to white */
+  background: white;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   position: relative;
+  /* Ensure no gradient effects from parent elements bleed through */
+  isolation: isolate;
+  z-index: 1;
 }
 
 .speaker-image {
@@ -224,26 +228,29 @@ section h2 .subtitle {
 
 .speaker-info {
   padding: 20px;
-  background: white; /* Ensure white background */
+  background: white;
+  /* Ensure solid background with no transparency */
+  position: relative;
+  z-index: 2; 
 }
 
 .speaker-info h3 {
-  color: rgb(107, 152, 191); /* Blue color for speaker name */
+  color: rgb(107, 152, 191);
   font-size: 1.4em;
   margin-bottom: 10px;
 }
 
 .speaker-bio {
-  color: rgb(116, 126, 134); /* Gray color for speaker bio */
+  color: rgb(116, 126, 134);
   line-height: 1.6;
   margin-bottom: 0;
 }
 
-/* Speaker Section Updates */
+/* Speaker Carousel */
 .speaker-carousel {
   position: relative;
   margin: 20px 0;
-  padding: 0 60px; /* Add padding to prevent arrows from overlapping */
+  padding: 0 60px;
 }
 
 .speaker-content-wrapper {
@@ -279,17 +286,6 @@ section h2 .subtitle {
   right: 10px;
 }
 
-.speaker-bio {
-  color: #fff;
-  line-height: 1.6;
-  margin-bottom: 5px;
-}
-
-.view-more-btn {
-  display: none; /* Hidden by default */
-  margin-top: 8px;
-}
-
 .nav-arrow span {
   color: #fff;
 }
@@ -311,71 +307,6 @@ section h2 .subtitle {
 
 .indicator.active {
   background: #fff;
-}
-
-/* Mobile specific */
-@media (max-width: 768px) {
-  .speaker-carousel {
-    padding: 0 30px; /* Smaller padding on mobile */
-  }
-  
-  .speaker-image {
-    height: 250px;
-  }
-  
-  .speaker-bio {
-    position: relative;
-    max-height: 4.5em;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  
-  .speaker-bio.collapsed {
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-  
-  .speaker-bio.expanded {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  .view-more-btn {
-    display: inline-block; /* Only show on mobile */
-  }
-}
-
-/* Desktop overrides */
-@media (min-width: 769px) {
-  .speaker-carousel {
-    padding: 0 60px; /* Larger padding on desktop */
-  }
-  
-  .speaker-card {
-    display: flex;
-    flex-direction: row;
-    max-height: 400px;
-  }
-  
-  .speaker-image {
-    width: 60%;
-    height: 400px;
-  }
-  
-  .speaker-info {
-    width: 40%;
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 25px;
-  }
-  
-  .speaker-bio {
-    /* No max height limitation on desktop */
-    max-height: none;
-    overflow: visible;
-  }
 }
 
 /* Countdown Section */
@@ -475,37 +406,7 @@ section h2 .subtitle {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.landing-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Mobile Landing Page */
-.mobile-landing {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  z-index: 9999;
-  display: none;
-  overflow: hidden;
-}
-
-.mobile-landing-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* Position content at the bottom */
+  justify-content: flex-end;
 }
 
 .landing-image {
@@ -532,6 +433,35 @@ section h2 .subtitle {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+/* Video Play Button */
+.video-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background-color: rgba(0, 64, 96, 0.7);
+  border: none;
+  border-radius: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-play-button span {
+  color: white;
+  font-size: 24px;
+  margin-left: 4px;
+}
+
+.video-play-button:hover {
+  background-color: rgba(0, 64, 96, 0.9);
 }
 
 /* Loading Indicator */
@@ -570,20 +500,20 @@ section h2 .subtitle {
   100% { transform: rotate(360deg); }
 }
 
+/* Landing Text Container */
 .landing-text-container {
   position: relative;
   padding: 0 20px 60px;
   z-index: 4;
   text-align: center;
   width: 100%;
-  /* Gradient with longer transition */
   background: linear-gradient(180.00deg, rgba(215, 235, 246, 0) 20%, rgba(141, 189, 208, 0.4) 60%, rgb(141, 189, 208) 100%);
 }
 
 .text-overlay {
   padding: 5px;
   margin-bottom: 10px;
-  margin-top: auto; /* Push to bottom of container */
+  margin-top: auto;
 }
 
 .landing-text {
@@ -645,187 +575,6 @@ section h2 .subtitle {
   100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Desktop overrides */
-@media (min-width: 769px) {
-  .mobile-landing {
-    display: none !important;
-  }
-}
-
-/* Desktop overrides */
-@media (min-width: 769px) {
-  section h2.mobile-title {
-    display: none;
-  }
-  
-  section h2.desktop-title {
-    display: block;
-  }
-  
-  .desktop-layout {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .schedule-day {
-    flex: 0 0 calc(33.33% - 20px);
-    margin-right: 20px;
-  }
-  
-  .schedule-day:last-child {
-    margin-right: 0;
-  }
-  
-  .mobile-landing {
-    display: none !important;
-  }
-  
-  /* Desktop speaker card optimizations */
-  .speaker-content-wrapper {
-    width: 90%;
-    margin: 0 auto;
-  }
-  
-  .speaker-card {
-    display: flex;
-    flex-direction: row;
-    max-height: 400px;
-  }
-  
-  .speaker-image {
-    width: 60%;
-    height: 400px;
-  }
-  
-  .speaker-info {
-    background: white;
-  }
-  
-  .speaker-info h3 {
-    color: rgb(107, 152, 191);
-  }
-  
-  .speaker-bio {
-    color: rgb(116, 126, 134);
-  }
-  
-  .nav-arrow {
-    top: 50%;
-  }
-  
-  .prev-arrow {
-    left: -50px;
-  }
-  
-  .next-arrow {
-    right: -50px;
-  }
-}
-
-/* Mobile specific */
-@media (max-width: 768px) {
-  .time-block-details {
-    font-size: 0.95em;
-  }
-  
-  .countdown-unit {
-    margin: 0 5px;
-  }
-  
-  .speaker-image {
-    height: 250px;
-  }
-  
-  .speaker-bio {
-    position: relative;
-    max-height: 4.5em;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  
-  .speaker-bio.collapsed {
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-  }
-  
-  .speaker-bio.expanded {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 10px; /* Add some padding for the scrollbar */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: rgba(107, 152, 191, 0.6) rgba(255, 255, 255, 0.1); /* For Firefox */
-  }
-  
-  /* Custom scrollbar for webkit browsers (Chrome, Safari, newer Edge) */
-  .speaker-bio.expanded::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .speaker-bio.expanded::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-  }
-  
-  .speaker-bio.expanded::-webkit-scrollbar-thumb {
-    background: rgba(107, 152, 191, 0.6);
-    border-radius: 10px;
-  }
-  
-  .speaker-bio.expanded::-webkit-scrollbar-thumb:hover {
-    background: rgba(107, 152, 191, 0.8);
-  }
-  
-  /* Add a subtle fade-out effect at the bottom to indicate more content */
-  .speaker-bio.expanded::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 30px;
-    background: linear-gradient(to bottom, transparent, white);
-    pointer-events: none; /* So it doesn't interfere with scrolling */
-    display: none; /* Initially hidden */
-  }
-  
-  /* Only show the fade effect if content is scrollable */
-  .speaker-bio.expanded.scrollable::after {
-    display: block;
-  }
-  
-  .view-more-btn {
-    display: inline-block;
-    margin-top: 5px;
-    color: rgb(107, 152, 191);
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 0.9em;
-  }
-  
-  .prev-arrow {
-    left: -10px;
-  }
-  
-  .next-arrow {
-    right: -10px;
-  }
-
-  .speaker-info {
-    background: white;
-  }
-  
-  .speaker-info h3 {
-    color: rgb(107, 152, 191);
-  }
-  
-  .speaker-bio {
-    color: rgb(116, 126, 134);
-  }
-}
-
 /* Preparation Section */
 .preparation-section {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -867,8 +616,103 @@ section h2 .subtitle {
   color: #fff;
 }
 
-/* Mobile Specifics */
+/* Mobile Specific Styles */
 @media (max-width: 768px) {
+  .speaker-carousel {
+    padding: 0 30px;
+  }
+  
+  .speaker-image {
+    height: 250px;
+  }
+  
+  .speaker-bio {
+    position: relative;
+    max-height: 4.5em;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    color: rgb(116, 126, 134) !important; /* Force text color */
+  }
+  
+  .speaker-bio.collapsed {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .speaker-bio.expanded {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(107, 152, 191, 0.6) rgba(255, 255, 255, 0.1);
+  }
+  
+  .speaker-bio.expanded::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .speaker-bio.expanded::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+  
+  .speaker-bio.expanded::-webkit-scrollbar-thumb {
+    background: rgba(107, 152, 191, 0.6);
+    border-radius: 10px;
+  }
+  
+  .speaker-bio.expanded::-webkit-scrollbar-thumb:hover {
+    background: rgba(107, 152, 191, 0.8);
+  }
+  
+  .speaker-bio.expanded::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, transparent, white);
+    pointer-events: none;
+    display: none !important; /* Remove the fade effect completely */
+  }
+
+  .speaker-bio.expanded.scrollable {
+    border-bottom: 2px dotted rgba(107, 152, 191, 0.5);
+    padding-bottom: 8px;
+  }
+  
+  .speaker-bio.expanded.scrollable::after {
+    display: block;
+  }
+  
+  .view-more-btn {
+    display: inline-block;
+    margin-top: 5px;
+    color: rgb(107, 152, 191);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9em;
+  }
+  
+  .prev-arrow {
+    left: -10px;
+  }
+  
+  .next-arrow {
+    right: -10px;
+  }
+  
+  .time-block-details {
+    font-size: 0.95em;
+  }
+  
+  .countdown-unit {
+    margin: 0 5px;
+  }
+  
   .preparation-section {
     padding-bottom: 30px;
   }
@@ -882,8 +726,79 @@ section h2 .subtitle {
   }
 }
 
-/* Desktop Specifics */
+/* Desktop Overrides */
 @media (min-width: 769px) {
+  section h2.mobile-title {
+    display: none;
+  }
+  
+  section h2.desktop-title {
+    display: block;
+  }
+  
+  .desktop-layout {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .schedule-day {
+    flex: 0 0 calc(33.33% - 20px);
+    margin-right: 20px;
+  }
+  
+  .schedule-day:last-child {
+    margin-right: 0;
+  }
+  
+  .mobile-landing {
+    display: none !important;
+  }
+  
+  .speaker-carousel {
+    padding: 0 60px;
+  }
+  
+  .speaker-content-wrapper {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .speaker-card {
+    display: flex;
+    flex-direction: row;
+    max-height: 400px;
+  }
+  
+  .speaker-image {
+    width: 60%;
+    height: 400px;
+  }
+  
+  .speaker-info {
+    width: 40%;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 25px;
+  }
+  
+  .speaker-bio {
+    max-height: none;
+    overflow: visible;
+  }
+  
+  .nav-arrow {
+    top: 50%;
+  }
+  
+  .prev-arrow {
+    left: -50px;
+  }
+  
+  .next-arrow {
+    right: -50px;
+  }
+  
   .preparation-content {
     display: flex;
     justify-content: space-between;

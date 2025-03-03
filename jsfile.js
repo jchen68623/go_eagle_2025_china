@@ -112,8 +112,21 @@ function initSpeakerCarousel() {
           bioElement.classList.remove('collapsed');
           bioElement.classList.add('expanded');
           this.textContent = '收起';
+          
+          // Check if content is scrollable and add class if needed
+          setTimeout(() => {
+            if (bioElement.scrollHeight > bioElement.clientHeight) {
+              bioElement.classList.add('scrollable');
+              
+              // Flash the scrollbar briefly to draw attention
+              bioElement.style.overflow = 'hidden';
+              setTimeout(() => {
+                bioElement.style.overflow = 'auto';
+              }, 300);
+            }
+          }, 10); // Small delay to ensure the expanded height has taken effect
         } else {
-          bioElement.classList.remove('expanded');
+          bioElement.classList.remove('expanded', 'scrollable');
           bioElement.classList.add('collapsed');
           this.textContent = '查看更多';
         }
