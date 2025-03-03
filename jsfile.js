@@ -175,9 +175,9 @@ function initSpeakerCarousel() {
   updateSpeakerDisplay();
   
   // Auto-advance every 6 seconds
-  setInterval(function() {
-    nextButton.click();
-  }, 6000);
+  // setInterval(function() {
+  //   nextButton.click();
+  // }, 6000);
 }
 
 function initCountdownTimer() {
