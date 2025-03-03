@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>做雄鹰领导力 - 活动日程</title>
-  <link rel="stylesheet" href="styles.css?v=0.5" />
+  <link rel="stylesheet" href="styles.css?v=0.8" />
 </head>
-<script src="jsfile.js?v=0.5"></script>
 <body>
   <!-- Mobile Landing Page Overlay -->
   <div id="mobile-landing" class="mobile-landing">
@@ -24,8 +23,8 @@
     </div>
   </div>
 
-  <!-- Redesigned Overview Section -->
-  <section class="overview-section">
+  <!-- Schedule Section -->
+  <section class="overview-section" id="schedule">
     <h2 class="desktop-title">Schedule<span class="subtitle">活动日程</span></h2>
     <h2 class="mobile-title">Schedule<br>活动日程</h2>
     
@@ -52,10 +51,10 @@
         <!-- Morning Block -->
         <div class="time-block">
           <div class="time-block-header">
-            <span class="time-block-icon">&#128197;</span>
+            <span class="time-block-icon">📅</span>
             <span class="time-block-title">早晨</span>
             <span class="time-block-time">8:40-9:30</span>
-            <span class="toggle-icon" onclick="toggleAccordion(this)">&#9650;</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
           </div>
           <div class="accordion-content active">
             <div class="time-block-details">
@@ -70,10 +69,10 @@
         <!-- Morning Session Block -->
         <div class="time-block">
           <div class="time-block-header">
-            <span class="time-block-icon">&#128197;</span>
+            <span class="time-block-icon">📅</span>
             <span class="time-block-title">上半场</span>
             <span class="time-block-time">11:00-13:00</span>
-            <span class="toggle-icon" onclick="toggleAccordion(this)">&#9650;</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
           </div>
           <div class="accordion-content active">
             <div class="time-block-details">
@@ -91,10 +90,10 @@
         <!-- Afternoon Block -->
         <div class="time-block">
           <div class="time-block-header">
-            <span class="time-block-icon">&#128197;</span>
+            <span class="time-block-icon">📅</span>
             <span class="time-block-title">生活提升</span>
             <span class="time-block-time">13:00-14:30</span>
-            <span class="toggle-icon" onclick="toggleAccordion(this)">&#9650;</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
           </div>
           <div class="accordion-content active">
             <div class="time-block-details">
@@ -112,10 +111,10 @@
         <!-- Product Expo Block -->
         <div class="time-block">
           <div class="time-block-header">
-            <span class="time-block-icon">&#128197;</span>
+            <span class="time-block-icon">📅</span>
             <span class="time-block-title">产品expo</span>
             <span class="time-block-time">14:30-15:20</span>
-            <span class="toggle-icon" onclick="toggleAccordion(this)">&#9650;</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
           </div>
           <div class="accordion-content active">
             <div class="time-block-details">
@@ -131,10 +130,10 @@
         <!-- Evening Session Block -->
         <div class="time-block">
           <div class="time-block-header">
-            <span class="time-block-icon">&#128197;</span>
+            <span class="time-block-icon">📅</span>
             <span class="time-block-title">下半场</span>
             <span class="time-block-time">19:30-21:30</span>
-            <span class="toggle-icon" onclick="toggleAccordion(this)">&#9650;</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
           </div>
           <div class="accordion-content active">
             <div class="time-block-details">
@@ -154,83 +153,58 @@
           <div class="day-date">3月9日，</div>
           <div class="day-name">星期日</div>
         </div>
-        <ul class="day-activities">
-          <li>10:00-12:00 Q&A</li>
-          <li>13:00-16:00 1on1 咨询</li>
-          <li>结束后自由离开</li>
-        </ul>
+
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">Q&A</span>
+            <span class="time-block-time">10:00-12:00</span>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">1on1 咨询</span>
+            <span class="time-block-time">13:00-16:00</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Speakers Showcase Section -->
-  <section class="speakers-section">
-    <div class="speakers-container">
-      <h2>演讲嘉宾</h2>
+  <!-- Speakers Section -->
+  <section class="speakers-section" id="speakers">
+    <h2 class="desktop-title">Speakers<span class="subtitle">演讲嘉宾</span></h2>
+    <h2 class="mobile-title">Speakers<br>演讲嘉宾</h2>
+    
+    <div class="speaker-carousel">
+      <!-- Navigation Arrows -->
+      <button class="nav-arrow prev-arrow" id="prevSpeaker">
+        <span>❮</span>
+      </button>
       
-      <div class="speaker-carousel">
-        <!-- Left Navigation Arrow -->
-        <button class="nav-arrow prev-arrow" id="prevSpeaker">
-          <span>&#10094;</span>
-        </button>
-        
-        <!-- Speakers Content -->
-        <div class="speaker-content-wrapper">
-          <div class="speaker-slides" id="speakerSlides">
-            <!-- Speaker 1 -->
-            <div class="speaker-slide">
-              <div class="speaker-image">
-                <img src="Kyle_Lauren.jpeg" alt="Kyle_Lauren">
-              </div>
-              <div class="speaker-info">
-                <h3>Kyle & Lauren Wilz</h3>
-                <div class="bio-container">
-                  <p class="speaker-bio collapsed">
-                    Kyle has a background in civil engineering and project management and is currently working part-time. 
-                    Lauren has a degree in English and was able to leave her corporate writing career in 2017 because of the business they built. Today she spends most of her time with their 5 year old daughter Addie during the day while empowering the next wave of entrepreneurs at night.</p>
-                  <span class="view-more-btn">查看更多</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Speaker 2 -->
-            <div class="speaker-slide">
-              <div class="speaker-image">
-                <img src="Jerry_Leann.jpeg" alt="Jerry_Leann">
-              </div>
-              <div class="speaker-info">
-                <h3>Jerry Tan & Leann Ren</h3>
-                <div class="bio-container">
-                  <p class="speaker-bio collapsed">
-                    Jerry is a banking industry director, while Leann transitioned from her data analyst role in her mid-20s due to business pursuits. 
-                    Having built a global enterprise, they now split their time between China and the US giving back and coaching others on how to create similar choice and options in their lives.</p>
-                  <span class="view-more-btn">查看更多</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Speaker 3 -->
-            <div class="speaker-slide">
-              <div class="speaker-image">
-                <img src="RamosChen.jpg" alt="RamosChen">
-              </div>
-              <div class="speaker-info">
-                <h3>Ramos Chen</h3>
-                <div class="bio-container">
-                  <p class="speaker-bio collapsed">
-                  </p>
-                  <span class="view-more-btn">查看更多</span>
-                </div>
-              </div>
+      <!-- Speakers Content -->
+      <div class="speaker-content-wrapper">
+        <div class="speaker-card">
+          <div class="speaker-image">
+            <img src="Jerry_Leann.jpeg" alt="Jerry_Leann">
+          </div>
+          <div class="speaker-info">
+            <h3>黄蜂 & 叶艾琳夫妇</h3>
+            <div class="bio-container">
+              <p class="speaker-bio collapsed">
+                公寓自斗米来，遍步波少像吗！躺车何食饭的吧但揽某家，苦斗场上切西巴鹅哦在为！五大她向跑羽六什久通甲王: 天墨入吉成地得来反妻忘爪乐米牛！晒睏天告力。唐宗四吉间封砂: 似刚详隋棉年见喝呸掌劫过'剑黑榆'，乃而七胜租！香母熄活，寸继给几年古渔中下管杯，包洁耳送點洋欠，字乾克，遗拔，允进八呢免雪毫，泉力熔'石二'。
+              </p>
+              <span class="view-more-btn">查看更多</span>
             </div>
           </div>
         </div>
-        
-        <!-- Right Navigation Arrow -->
-        <button class="nav-arrow next-arrow" id="nextSpeaker">
-          <span>&#10095;</span>
-        </button>
       </div>
+      
+      <button class="nav-arrow next-arrow" id="nextSpeaker">
+        <span>❯</span>
+      </button>
       
       <!-- Indicator Dots -->
       <div class="speaker-indicators">
@@ -242,66 +216,70 @@
     </div>
   </section>
 
+  <!-- Preparation Section -->
+  <section class="preparation-section" id="preparation">
+    <h2 class="desktop-title">Preparation<span class="subtitle">活动准备</span></h2>
+    <h2 class="mobile-title">Preparation<br>活动准备</h2>
+    
+    <div class="preparation-content">
+      <div class="preparation-group">
+        <h3>思考问题</h3>
+        <ul class="preparation-list">
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+        </ul>
+      </div>
+      
+      <div class="preparation-group">
+        <h3>物品准备</h3>
+        <ul class="preparation-list">
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+          <li>团队晚餐（可选）</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- Countdown Section -->
-  <section class="countdown-section">
+  <section class="countdown-section" id="countdown">
     <div class="countdown-container">
-      <h2>活动倒计时 | Event Countdown</h2>
+      <div class="countdown-message">距离活动还有</div>
       
       <div class="countdown-timer">
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-days">00</div>
-          <div class="countdown-label">
-            <span class="cn">天</span>
-            <span class="en">Days</span>
-          </div>
+          <span id="countdown-days">8</span>
+          <span class="countdown-label">天</span>
         </div>
         
-        <div class="countdown-separator">:</div>
-        
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-hours">00</div>
-          <div class="countdown-label">
-            <span class="cn">时</span>
-            <span class="en">Hours</span>
-          </div>
+          <span id="countdown-hours">19</span>
+          <span class="countdown-label">小时</span>
         </div>
         
-        <div class="countdown-separator">:</div>
-        
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-minutes">00</div>
-          <div class="countdown-label">
-            <span class="cn">分</span>
-            <span class="en">Minutes</span>
-          </div>
+          <span id="countdown-minutes">24</span>
+          <span class="countdown-label">分</span>
         </div>
         
-        <div class="countdown-separator">:</div>
-        
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-seconds">00</div>
-          <div class="countdown-label">
-            <span class="cn">秒</span>
-            <span class="en">Seconds</span>
-          </div>
+          <span id="countdown-seconds">14</span>
+          <span class="countdown-label">秒</span>
         </div>
       </div>
       
-      <div class="timezone-note" id="user-timezone"></div>
+      <a href="#" class="location-button">南昌不见不散</a>
+      
+      <div class="event-footer">
+        谭任中国团队 · 南昌2025
+      </div>
     </div>
   </section>
+
+  <script src="jsfile.js?v=0.8"></script>
 </body>
 </html>
-
-<script>
-  function toggleAccordion(element) {
-    // Toggle arrow direction
-    element.classList.toggle('rotate-icon');
-    
-    // Find the content container
-    var content = element.parentElement.nextElementSibling;
-    
-    // Toggle active class
-    content.classList.toggle('active');
-  }
-  </script>
