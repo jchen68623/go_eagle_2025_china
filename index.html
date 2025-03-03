@@ -4,18 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>做雄鹰领导力 - 活动日程</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=1.3" />
 </head>
-<script src="jsfile.js"></script>
 <body>
   <!-- Mobile Landing Page Overlay -->
   <div id="mobile-landing" class="mobile-landing">
     <div class="mobile-landing-content">
       <div class="landing-image">
-        <!-- The background image will be set in CSS -->
+        <!-- Video container with loading indicator -->
+        <div class="video-container">
+          <div class="loading-indicator">
+            <div class="spinner"></div>
+            <div class="loading-text">加载中...</div>
+          </div>
+          <video id="landing-video" autoplay muted playsinline loop>
+            <source src="assets/landing_page_video.mp4?v=1.1" type="video/mp4">
+          </video>
+        </div>
       </div>
       <div class="landing-text-container">
-        <h1 class="landing-text">开启雄鹰之旅</h1>
+        <div class="text-overlay">
+          <h1 class="landing-text">做雄鹰领导力</h1>
+          <h2 class="landing-subtext">梦想起航之旅</h2>
+        </div>
         <div class="swipe-indicator">
           <div class="swipe-arrow"></div>
           <div class="swipe-text">向上滑动</div>
@@ -24,376 +35,273 @@
     </div>
   </div>
 
-  <!-- Full-Width Banner at the Top -->
-  <header class="banner">
-    <!-- Replace 'banner.png' with your cropped image filename -->
-    <img src="雄鹰领导力2025_title.png" alt="做雄鹰领导力背景图" class="banner-image" />
-  </header>
-
-  <!-- Overview Section -->
-  <section class="overview-section">
-    <div class="overview-container">
-      <h2>活动概览</h2>
-      
-      <div class="days-container">
-        <!-- Friday -->
-        <div class="overview-day">
-          <h3>周五</h3>
-          <ul>
-            <li>到达 + 团队晚餐</li>
-          </ul>
+  <!-- Schedule Section -->
+  <section class="overview-section" id="schedule">
+    <h2 class="desktop-title">Schedule<span class="subtitle">活动日程</span></h2>
+    <h2 class="mobile-title">Schedule<br>活动日程</h2>
+    
+    <div class="desktop-layout">
+      <!-- Friday -->
+      <div class="schedule-day">
+        <div class="day-header">
+          <div class="day-date">3月7日，</div>
+          <div class="day-name">星期五</div>
         </div>
-
-        <!-- Saturday -->
-        <div class="overview-day">
-          <h3>周六</h3>
-          <p><strong>早晨:</strong></p>
-          <li>8:40-9:30am 开启高效的早晨：健身/瑜伽</li>
-          <p><strong>上半场:</strong></p>
-          <ul>
-            <li>11:00-1:00pm 生意培训</li>
-            <li>1:00-2:30pm 生活提升</li>
-            <li>2:30-3:20pm 产品expo</li>
-            <li>3:20-4:10pm 生意培训</li>
-          </ul>
-          <p><strong>下半场:</strong></p>
-          <ul>
-            <li>7:30-7:50pm 团队表彰</li>
-            <li>7:50-9:30pm 生意培训</li>
-            <li>11:00-12:20am 围炉夜话</li>
-          </ul>
-        </div>
-
-        <!-- Sunday -->
-        <div class="overview-day">
-          <h3>周日</h3>
-          <ul>
-            <li>10:00-12:00pm Q&amp;A</li>
-            <li>1:00-4:00pm 1on1 咨询</li>
-          </ul>
-        </div>
+        <ul class="day-activities">
+          <li>自行到达酒店</li>
+          <li>团队晚餐（可选）</li>
+        </ul>
       </div>
-    </div>
-  </section>
 
-  <!-- Speakers Showcase Section -->
-  <section class="speakers-section">
-    <div class="speakers-container">
-      <h2>演讲嘉宾</h2>
-      
-      <div class="speaker-carousel">
-        <!-- Left Navigation Arrow -->
-        <button class="nav-arrow prev-arrow" id="prevSpeaker">
-          <span>&#10094;</span>
-        </button>
+      <!-- Saturday -->
+      <div class="schedule-day">
+        <div class="day-header">
+          <div class="day-date">3月8日，</div>
+          <div class="day-name">星期六</div>
+        </div>
         
-        <!-- Speakers Content -->
-        <div class="speaker-content-wrapper">
-          <div class="speaker-slides" id="speakerSlides">
-            <!-- Speaker 1 -->
-            <div class="speaker-slide">
-              <div class="speaker-image">
-                <img src="Kyle_Lauren.jpeg" alt="Kyle_Lauren">
-              </div>
-              <div class="speaker-info">
-                <h3>Kyle & Lauren Wilz</h3>
-                <div class="bio-container">
-                  <p class="speaker-bio collapsed">
-                    Kyle has a background in civil engineering and project management and is currently working part-time. 
-                    Lauren has a degree in English and was able to leave her corporate writing career in 2017 because of the business they built. Today she spends most of her time with their 5 year old daughter Addie during the day while empowering the next wave of entrepreneurs at night.</p>
-                  <span class="view-more-btn">查看更多</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Speaker 2 -->
-            <div class="speaker-slide">
-              <div class="speaker-image">
-                <img src="Jerry_Leann.jpeg" alt="Jerry_Leann">
-              </div>
-              <div class="speaker-info">
-                <h3>Jerry Tan & Leann Ren</h3>
-                <div class="bio-container">
-                  <p class="speaker-bio collapsed">
-                    Jerry is a banking industry director, while Leann transitioned from her data analyst role in her mid-20s due to business pursuits. 
-                    Having built a global enterprise, they now split their time between China and the US giving back and coaching others on how to create similar choice and options in their lives.</p>
-                  <span class="view-more-btn">查看更多</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Speaker 3 -->
-            <div class="speaker-slide">
-              <div class="speaker-image">
-                <img src="RamosChen.jpg" alt="RamosChen">
-              </div>
-              <div class="speaker-info">
-                <h3>Ramos Chen</h3>
-                <div class="bio-container">
-                  <p class="speaker-bio collapsed">
-                  </p>
-                  <span class="view-more-btn">查看更多</span>
-                </div>
-              </div>
+        <!-- Morning Block -->
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">早晨</span>
+            <span class="time-block-time">8:40-9:30</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
+          </div>
+          <div class="accordion-content active">
+            <div class="time-block-details">
+              <ul>
+                <li>健身组：Sean</li>
+                <li>瑜伽组： Blair</li>
+                <li><a href="https://v9mf46tq71.feishu.cn/share/base/form/shrcnlOOoEhMLBwtUTPm4xRPGFu" target="_blank"><span class="under-line">点击报名场次>></span></a></li>
+              </ul>
             </div>
           </div>
         </div>
         
-        <!-- Right Navigation Arrow -->
-        <button class="nav-arrow next-arrow" id="nextSpeaker">
-          <span>&#10095;</span>
-        </button>
+        <!-- Morning Session Block -->
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">生意提升-上半场</span>
+            <span class="time-block-time">11:00-13:00</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
+          </div>
+          <div class="accordion-content active">
+            <div class="time-block-details">
+              <ul>
+                <li>11:00-11:10 开场</li>
+                <li>11:11-11:30 释放你的愿力</li>
+                <li>11:33-12:15 企业家故事会</li>
+                <li>12:17-12:45 B象限企业家的特质</li>
+                <li>12:47-13:00 夯实你的创业基础</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Afternoon Block -->
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">生活提升</span>
+            <span class="time-block-time">13:00-14:30</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
+          </div>
+          <div class="accordion-content active">
+            <div class="time-block-details">
+              <ul>
+                <li>13:06-13:36 个人生态圈构-财务</li>
+                <li>13:36-13:51 个人生态圈构-健康</li>
+                <li>13:51-14:05 个人的生态圈-人际关系</li>
+                <li>14:07-14:25 互动话题：升级你的沟通和演讲</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Product Expo Block -->
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">产品expo</span>
+            <span class="time-block-time">14:30-15:20</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
+          </div>
+          <div class="accordion-content active">
+            <div class="time-block-details">
+              <ul>
+                <li>家科日化</li>
+                <li>营养健康</li>
+                <li>护肤美妆+读书会运营</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <ul class="day-activities">
+          <li>特别活动：给导师的一封信</li>
+        </ul>
+        <br>
+        
+        <!-- Evening Session Block -->
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">生意提升-下半场</span>
+            <span class="time-block-time">19:30-22:40</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
+          </div>
+          <div class="accordion-content active">
+            <div class="time-block-details">
+              <ul>
+                <li>19:30-19:35 开场热身</li>
+                <li>19:36-19:51 团队表彰</li>
+                <li>19:52-20:01 负责的合作伙伴关系（B阶段）</li>
+                <li>20:05-21:05 技能升级实战</li>
+                <li>21:06-21:30 在对话和筛选过程中建立优势</li>
+                <li>21:35-22:20 人生的不同阶段步步为赢（男士，女士，伉俪）</li>
+                <li>22:22-22:40 你的下一个季度</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Added Night Activity -->
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">🌙</span>
+            <span class="time-block-title">领导力达标活动</span>
+            <span class="time-block-time">23:45-00:45</span>
+            <span class="toggle-icon" onclick="toggleAccordion(this)">▲</span>
+          </div>
+          <div class="accordion-content active">
+            <div class="time-block-details">
+              <ul>
+                <li>特邀嘉宾：凯尔和劳伦 威尔兹Kyle& Lauren Wilz</li>
+                <li>达标标准：1000分+2系统市场或过去两个月至少launch一个伙伴</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Indicator Dots -->
-      <div class="speaker-indicators">
-        <span class="indicator active" data-index="0"></span>
-        <span class="indicator" data-index="1"></span>
-        <span class="indicator" data-index="2"></span>
-        <span class="indicator" data-index="3"></span>
+
+      <!-- Sunday -->
+      <div class="schedule-day">
+        <div class="day-header">
+          <div class="day-date">3月9日，</div>
+          <div class="day-name">星期日</div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">Q&A</span>
+            <span class="time-block-time">10:00-12:00</span>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-block-header">
+            <span class="time-block-icon">📅</span>
+            <span class="time-block-title">1on1 咨询</span>
+            <span class="time-block-time">13:00-16:00</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Detailed Schedule Section -->
-  <!-- <section class="details-section">
-    <div class="details-container">
-      <h2>星期六详细日程</h2>
-
-      <div class="schedule-item">
-        <div class="time">8:40am - 9:30am</div>
-        <div class="details">
-          <h3>健身组: Sean</h3>
-          <ul>
-            <li>开启动效的早餐</li>
-          </ul>
-        </div>
+  <!-- Speakers Section -->
+  <section class="speakers-section" id="speakers">
+    <h2 class="desktop-title">Speakers<span class="subtitle">演讲嘉宾</span></h2>
+    <h2 class="mobile-title">Speakers<br>演讲嘉宾</h2>
+    
+    <div class="speaker-carousel">
+      <!-- Navigation Arrows -->
+      <button class="nav-arrow prev-arrow" id="prevSpeaker">
+        <span>❮</span>
+      </button>
+      
+      <!-- Speakers Content -->
+      <div class="speaker-content-wrapper">
+        <!-- Speaker card will be dynamically inserted here -->
+        <div id="speakerCardContainer"></div>
       </div>
+      
+      <button class="nav-arrow next-arrow" id="nextSpeaker">
+        <span>❯</span>
+      </button>
+      
+      <!-- Indicator Dots will be dynamically created -->
+      <div class="speaker-indicators" id="speakerIndicators"></div>
+    </div>
+  </section>
 
-      <div class="schedule-item">
-        <div class="time">9:40am - 10:40am</div>
-        <div class="details">
-          <h3>DJ: 播放音乐, 测试设备</h3>
-          <ul>
-            <li>大家有序入场</li>
-          </ul>
-        </div>
+  <!-- Preparation Section -->
+  <!-- <section class="preparation-section" id="preparation">
+    <h2 class="desktop-title">Preparation<span class="subtitle">活动准备</span></h2>
+    <h2 class="mobile-title">Preparation<br>活动准备</h2>
+    
+    <div class="preparation-content">
+      <div class="preparation-group">
+        <h3>思考问题</h3>
+        <ul class="preparation-list">
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+        </ul>
       </div>
-
-      <div class="schedule-item">
-        <div class="time">11:00am - 11:13am</div>
-        <div class="details">
-          <h3>主持人: 了了安</h3>
-          <ul>
-            <li>开场，介绍活动安排和注意事项 (3 mins)</li>
-            <li>Welcome Message from Sean, Blair, Li (2 mins each)</li>
-            <li>介绍第一位演讲嘉宾</li>
-          </ul>
-        </div>
+      
+      <div class="preparation-group">
+        <h3>物品准备</h3>
+        <ul class="preparation-list">
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+          <li>自行到达南昌</li>
+          <li>团队晚餐（可选）</li>
+          <li>团队晚餐（可选）</li>
+        </ul>
       </div>
-
-      <div class="schedule-item">
-        <div class="time">11:13am - 11:33am</div>
-        <div class="details">
-          <h3>Blair</h3>
-          <ul>
-            <li>稀缺的领导力</li>
-            <li>领导生活方式可以变现和赚更多的钱</li>
-            <li>介绍的需求</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">11:34am - 11:53am</div>
-        <div class="details">
-          <h3>Blair, Ramos</h3>
-          <ul>
-            <li>决心投入事业和环境</li>
-            <li>分享经历过的低谷</li>
-            <li>分享得到的有趣核心</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">12:17pm - 12:45pm</div>
-        <div class="details">
-          <h3>特邀嘉宾: 黄蜂 &amp; 叶艾琳</h3>
-          <ul>
-            <li>B stage机会和资源</li>
-            <li>建立新的部门和项目</li>
-            <li>创业策略和团队成长分享</li>
-            <li>如何应对生活挑战和诱惑</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">12:47pm - 1:00pm</div>
-        <div class="details">
-          <h3>雷前路</h3>
-          <ul>
-            <li>夸奖家人的影响力</li>
-            <li>过去0-12个月的变化和挑战</li>
-            <li>行业内的机会观察</li>
-            <li>个人感悟</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">1:06pm - 1:36pm</div>
-        <div class="details">
-          <h3>财务 (Jerry + Emma + 卓程)</h3>
-          <ul>
-            <li>个人生态圈-财务管理</li>
-            <li>有效预算和现金流增长</li>
-            <li>解析投资、贷款与消费</li>
-            <li>分享快速增长的秘诀</li>
-            <li>投资六大要点，兼顾家庭与健康</li>
-            <li>Emma的财务实现技巧</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">1:36pm - 1:51pm</div>
-        <div class="details">
-          <h3>健康 (Blair)</h3>
-          <ul>
-            <li>了解身体：意识、运动与精力</li>
-            <li>健康管理关键要素</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">1:51pm - 2:05pm</div>
-        <div class="details">
-          <h3>美 + 可茹</h3>
-          <ul>
-            <li>个人生态美学分享</li>
-            <li>提升生活审美与品质</li>
-            <li>基本护肤与仪容管理</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">2:07pm - 2:25pm (18 mins)</div>
-        <div class="details">
-          <h3>Sean</h3>
-          <ul>
-            <li>互动演讲：沟通与演示技巧</li>
-            <li>演讲表达结构与要点</li>
-            <li>三步提升沟通与说服力</li>
-            <li>现场演练</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">2:30pm - 3:20pm</div>
-        <div class="details">
-          <h3>三组 Station</h3>
-          <ul>
-            <li>家政目标展示 (Sean + 其他团队)</li>
-            <li>家务分工示范</li>
-            <li>XS demo</li>
-            <li>更多互动体验</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">3:22pm - 3:40pm</div>
-        <div class="details">
-          <h3>Sean</h3>
-          <ul>
-            <li>生命中的收入与回报</li>
-            <li>3-5年规划</li>
-            <li>5-10年规划</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">3:42pm - 4:10pm</div>
-        <div class="details">
-          <h3>特邀嘉宾: 陈子全 &amp; 婉君</h3>
-          <ul>
-            <li>阐述目标与愿景</li>
-            <li>PPT介绍和引导</li>
-            <li>分享99个核心精华</li>
-            <li>个案演讲需求</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="schedule-item">
-        <div class="time">4:10pm - 4:30pm</div>
-        <div class="details">
-          <h3>目标解析 &amp; 互动</h3>
-          <ul>
-            <li>目标阐述与实践计划</li>
-            <li>Q&amp;A / 自由讨论</li>
-            <li>收尾与总结</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </section> -->
 
-
   <!-- Countdown Section -->
-  <section class="countdown-section">
+  <section class="countdown-section" id="countdown">
     <div class="countdown-container">
-      <h2>活动倒计时 | Event Countdown</h2>
+      <div class="countdown-message">距离活动还有</div>
       
       <div class="countdown-timer">
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-days">00</div>
-          <div class="countdown-label">
-            <span class="cn">天</span>
-            <span class="en">Days</span>
-          </div>
+          <span id="countdown-days">8</span>
+          <span class="countdown-label">天</span>
         </div>
         
-        <div class="countdown-separator">:</div>
-        
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-hours">00</div>
-          <div class="countdown-label">
-            <span class="cn">时</span>
-            <span class="en">Hours</span>
-          </div>
+          <span id="countdown-hours">19</span>
+          <span class="countdown-label">小时</span>
         </div>
         
-        <div class="countdown-separator">:</div>
-        
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-minutes">00</div>
-          <div class="countdown-label">
-            <span class="cn">分</span>
-            <span class="en">Minutes</span>
-          </div>
+          <span id="countdown-minutes">24</span>
+          <span class="countdown-label">分</span>
         </div>
         
-        <div class="countdown-separator">:</div>
-        
         <div class="countdown-unit">
-          <div class="countdown-value" id="countdown-seconds">00</div>
-          <div class="countdown-label">
-            <span class="cn">秒</span>
-            <span class="en">Seconds</span>
-          </div>
+          <span id="countdown-seconds">14</span>
+          <span class="countdown-label">秒</span>
         </div>
       </div>
       
-      <div class="timezone-note" id="user-timezone"></div>
+      <a href="#" class="location-button">南昌不见不散</a>
+      
+      <div class="event-footer">
+        谭任中国团队 · 南昌2025
+      </div>
     </div>
   </section>
+
+  <script src="jsfile.js?v=1.3"></script>
 </body>
 </html>
