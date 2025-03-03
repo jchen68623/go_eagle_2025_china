@@ -242,12 +242,50 @@ function initMobileLanding() {
     // Prevent scrolling on main content while landing page is visible
     document.body.style.overflow = 'hidden';
     
+    // Add play button for browsers that block autoplay
+    const playButton = document.createElement('button');
+    playButton.className = 'video-play-button';
+    playButton.innerHTML = '<span>▶</span>';
+    video.parentNode.appendChild(playButton);
+    
+    // Function to attempt autoplay with different methods
+    function attemptAutoplay() {
+      // Promise-based attempt to play
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Autoplay started successfully
+          playButton.style.display = 'none';
+          console.log('Autoplay successful');
+        }).catch(error => {
+          // Autoplay was prevented
+          console.log('Autoplay prevented:', error);
+          playButton.style.display = 'flex'; // Show play button
+        });
+      }
+    }
+    
+    // Try to autoplay when metadata is loaded
+    video.addEventListener('loadedmetadata', function() {
+      attemptAutoplay();
+    });
+    
     // Hide loading indicator once video is loaded enough to play
     video.addEventListener('canplay', function() {
       loadingIndicator.style.opacity = '0';
       setTimeout(function() {
         loadingIndicator.style.display = 'none';
       }, 500);
+      
+      // Try autoplay again when can play
+      attemptAutoplay();
+    });
+    
+    // Play button click handler
+    playButton.addEventListener('click', function() {
+      video.play();
+      playButton.style.display = 'none';
     });
     
     // If video takes too long to load or fails, hide loading indicator after 5 seconds
@@ -297,10 +335,16 @@ function initMobileLanding() {
       }, 500);
     }
     
-    // Also add click functionality as a fallback
-    landingPage.addEventListener('click', function() {
-      hideLandingPage();
-    });
+    // Only dismiss when clicking on the text container or swipe indicator
+    const textContainer = document.querySelector('.landing-text-container');
+    if (textContainer) {
+      textContainer.addEventListener('click', function(e) {
+        // Don't include the play button in the clickable area
+        if (e.target !== playButton && !playButton.contains(e.target)) {
+          hideLandingPage();
+        }
+      });
+    }
   }
 }
 
