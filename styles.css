@@ -77,11 +77,11 @@ section h2 .subtitle {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .day-date {
   font-size: 1.2em;
-  font-weight: 600;
   color: #fff;
   margin-right: 10px;
 }
@@ -114,6 +114,7 @@ section h2 .subtitle {
   align-items: center;
   margin-bottom: 8px;
   position: relative;
+  font-weight: 600;
 }
 
 .time-block-icon {
@@ -149,7 +150,7 @@ section h2 .subtitle {
 
 .time-block-details li {
   margin-bottom: 8px;
-  color: #fff;
+  color: rgb(107, 152, 191);
   position: relative;
   padding-left: 0;
 }
@@ -190,9 +191,9 @@ section h2 .subtitle {
   padding-bottom: 0;
 }
 
-/* Speaker Card */
+/* Speaker Card Updated Colors */
 .speaker-card {
-  background: rgba(255, 255, 255, 0.2);
+  background: white; /* Change from semi-transparent to white */
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 30px;
@@ -215,16 +216,17 @@ section h2 .subtitle {
 
 .speaker-info {
   padding: 20px;
+  background: white; /* Ensure white background */
 }
 
 .speaker-info h3 {
-  color: #fff;
+  color: rgb(107, 152, 191); /* Blue color for speaker name */
   font-size: 1.4em;
   margin-bottom: 10px;
 }
 
 .speaker-bio {
-  color: #fff;
+  color: rgb(116, 126, 134); /* Gray color for speaker bio */
   line-height: 1.6;
   margin-bottom: 0;
 }
@@ -278,7 +280,7 @@ section h2 .subtitle {
 .view-more-btn {
   display: none; /* Hidden by default */
   margin-top: 8px;
-  color: #fff;
+  color: rgb(107, 152, 191); /* Match the heading color */
   font-weight: bold;
   cursor: pointer;
   font-size: 0.9em;
@@ -590,8 +592,15 @@ section h2 .subtitle {
   }
   
   .speaker-info {
-    width: 40%;
-    overflow-y: auto;
+    background: white;
+  }
+  
+  .speaker-info h3 {
+    color: rgb(107, 152, 191);
+  }
+  
+  .speaker-bio {
+    color: rgb(116, 126, 134);
   }
   
   .nav-arrow {
@@ -643,7 +652,7 @@ section h2 .subtitle {
   .view-more-btn {
     display: inline-block;
     margin-top: 5px;
-    color: #fff;
+    color: rgb(107, 152, 191);
     font-weight: bold;
     cursor: pointer;
     font-size: 0.9em;
@@ -655,6 +664,18 @@ section h2 .subtitle {
   
   .next-arrow {
     right: -10px;
+  }
+
+  .speaker-info {
+    background: white;
+  }
+  
+  .speaker-info h3 {
+    color: rgb(107, 152, 191);
+  }
+  
+  .speaker-bio {
+    color: rgb(116, 126, 134);
   }
 }
 
