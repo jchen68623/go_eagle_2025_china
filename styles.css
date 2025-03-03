@@ -18,7 +18,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('blue-swirl-background.png'); /* Update with your image path */
+  background-image: url('assets/blue-swirl-background.png'); /* Update with your image path */
   background-size: cover;
   background-position: center;
   z-index: -2; /* Place it below the gradient */
@@ -479,7 +479,7 @@ section h2 .subtitle {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('雄鹰领导力mobile背景.png');
+  background-image: url('assets/雄鹰领导力mobile背景.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

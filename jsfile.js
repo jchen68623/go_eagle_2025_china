@@ -12,65 +12,144 @@ document.addEventListener('DOMContentLoaded', function() {
   initMenuToggle();
 });
 
-// Add this to your existing initSpeakerCarousel function
 function initSpeakerCarousel() {
   // Get carousel elements
   const prevButton = document.getElementById('prevSpeaker');
   const nextButton = document.getElementById('nextSpeaker');
-  const indicators = document.querySelectorAll('.indicator');
-  const viewMoreButtons = document.querySelectorAll('.view-more-btn');
+  const speakerCardContainer = document.getElementById('speakerCardContainer');
+  const indicatorsContainer = document.getElementById('speakerIndicators');
   
-  if (!prevButton || !nextButton) return;
+  if (!prevButton || !nextButton || !speakerCardContainer || !indicatorsContainer) return;
   
-  // Sample speaker data - in a real app, this would come from a database or API
+  // Speaker data
   const speakers = [
     {
-      name: "黄蜂 & 叶艾琳夫妇",
-      image: "Jerry_Leann.jpeg",
-      bio: "公寓自斗米来，遍步波少像吗！躺车何食饭的吧但揽某家，苦斗场上切西巴鹅哦在为！五大她向跑羽六什久通甲王: 天墨入吉成地得来反妻忘爪乐米牛！晒睏天告力。唐宗四吉间封砂: 似刚详隋棉年见喝呸掌劫过'剑黑榆'，乃而七胜租！香母熄活，寸继给几年古渔中下管杯，包洁耳送點洋欠，字乾克，遗拔，允进八呢免雪毫，泉力熔'石二'。"
+      name: "陈子全&唐婉君",
+      image: "assets/Phillip_Winnie.png",
+      bio: "陈先生与唐小姐均曾就职于IBM公司，凭借卓越的专业能力与不懈努力，在90年代初期实现了典型的'美国梦'。然而，他们并未满足于稳定的职业生涯，而是选择开启副业创业之旅，积极探索新的发展机遇。凭借前瞻性的商业眼光与坚定的执行力，他们在2000年初成功实现了财务与职业的双重自由。目前，陈先生与唐小姐定居于美国北卡罗莱纳州，经营多项自主业务，展现出卓越的企业家精神与多元化发展能力。他们的女儿思思在父母的全职陪伴下健康成长，现于北卡州立大学攻读心理学博士学位，与此同时，陈先生与唐小姐早年在中国创立的业务已深深扎根，即便在他们未直接参与的情况下，依然保持蓬勃发展，为无数创业者与追梦者提供了宝贵的经验与启发。"
     },
     {
       name: "Kyle & Lauren Wilz",
-      image: "Kyle_Lauren.jpeg",
-      bio: "Kyle has a background in civil engineering and project management and is currently working part-time. Lauren has a degree in English and was able to leave her corporate writing career in 2017 because of the business they built. Today she spends most of her time with their 5 year old daughter Addie during the day while empowering the next wave of entrepreneurs at night."
+      image: "assets/Kyle_Lauren.jpeg",
+      bio: "Kyle拥有土木工程和项目管理专业背景，目前兼职工程管理，Lauren女士毕业于英语专业，曾任职于企业写作领域。得益于双方共同创立的业务发展，Lauren女士于2017年成功实现了职业转型，告别了传统职场生涯。如今，Lauren女士白天主要陪伴他们五岁的女儿Addie，致力于家庭教育的投入；晚间则积极投身于创业指导工作，为新一代创业者提供支持与赋能。Kyle与Lauren通过灵活的时间管理与职业规划，实现了家庭与事业的平衡发展，同时也在不断探索个人价值与社会贡献的更多可能性。"
+    },
+    {
+      name: "谭洪川Jerry&任莹玥Leann",
+      image: "assets/Jerry_Leann.jpeg",
+      bio: "Jerry现任纽约知名法资银行资深总监Leann女士曾担任资深数据分析师。两人在学生时期便开启了创业之旅，凭借出色的执行力，和创业前辈的帮助，Leann女士在22岁时即实现了职业自由，成功转型为全职创业者。目前，Jerry与Leann以全球化视野规划事业与生活，每年在美国和中国均衡分配时间，实现了真正的全球居民生活方式。他们以高效的时间管理和多元化的发展策略，积极拓展国际业务，致力于将自身的专业知识与实践经验分享给更多创业者。"
+    },
+    {
+      name: "陈笑涵Sean&黄宇Blair",
+      image: "assets/Sean_Blair.jpg",
+      bio: ""
+    },
+    {
+      name: "黄铮Johnny&叶艾琳Irene",
+      image: "assets/Johnny_Irene.jpeg",
+      bio: "Johnny与Irene在B象限企业家的路上不断成长，他们对全职创业与职业人生进行了深度思考和实践。Johnny凭借科班的商科背景，在外企工作多年，对数字化营销和商业策略有深刻见解。Irene作为一位财务专业人士，在企业财务和个人财富规划方面拥有丰富经验。两人在创业过程中不断强化团队意识和长期发展观念，在中国和美国两地拓展业务，始终坚持以人为本的核心价值观。他们在家庭与事业的平衡中找到了自己的节奏，并致力于帮助更多有志之士实现自由创业的梦想。"
     },
     {
       name: "Ramos Chen",
-      image: "RamosChen.jpg",
-      bio: "Ramos 从创业低谷走向成功，擅长分享实战经验和创业心得。他的创业故事激励了无数创业者坚持梦想，专注于帮助他人在困境中找到突破口。"
+      image: "assets/RamosChen.jpg",
+      bio: ""
     }
   ];
   
   let currentSpeakerIndex = 0;
   
-  // Update the speaker display
+  // Create indicator dots based on number of speakers
+  function createIndicators() {
+    indicatorsContainer.innerHTML = '';
+    speakers.forEach((speaker, index) => {
+      const dot = document.createElement('span');
+      dot.className = 'indicator' + (index === 0 ? ' active' : '');
+      dot.setAttribute('data-index', index);
+      dot.addEventListener('click', () => {
+        currentSpeakerIndex = index;
+        updateSpeakerDisplay();
+      });
+      indicatorsContainer.appendChild(dot);
+    });
+  }
+  
+  // Create speaker card HTML
+  function createSpeakerCard(speaker) {
+    return `
+      <div class="speaker-card">
+        <div class="speaker-image">
+          <img src="${speaker.image}" alt="${speaker.name}">
+        </div>
+        <div class="speaker-info">
+          <h3>${speaker.name}</h3>
+          <div class="bio-container">
+            <p class="speaker-bio collapsed">${speaker.bio}</p>
+            ${speaker.bio ? '<span class="view-more-btn">查看更多</span>' : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  // Update speaker display
   function updateSpeakerDisplay() {
     const currentSpeaker = speakers[currentSpeakerIndex];
-    const speakerCard = document.querySelector('.speaker-card');
     
-    if (speakerCard) {
-      speakerCard.querySelector('.speaker-image img').src = currentSpeaker.image;
-      speakerCard.querySelector('.speaker-image img').alt = currentSpeaker.name;
-      speakerCard.querySelector('.speaker-info h3').textContent = currentSpeaker.name;
-      speakerCard.querySelector('.speaker-bio').textContent = currentSpeaker.bio;
-      
-      // Reset view more state
-      const bioElement = speakerCard.querySelector('.speaker-bio');
-      const viewMoreBtn = speakerCard.querySelector('.view-more-btn');
-      if (bioElement && viewMoreBtn) {
-        bioElement.classList.add('collapsed');
-        bioElement.classList.remove('expanded');
-        viewMoreBtn.textContent = '查看更多';
-      }
-      
-      // Update indicators
-      indicators.forEach((indicator, index) => {
-        if (index === currentSpeakerIndex) {
-          indicator.classList.add('active');
+    // Update speaker card
+    speakerCardContainer.innerHTML = createSpeakerCard(currentSpeaker);
+    
+    // Add event listener to view more button if it exists
+    const viewMoreBtn = speakerCardContainer.querySelector('.view-more-btn');
+    if (viewMoreBtn) {
+      viewMoreBtn.addEventListener('click', function() {
+        const bioElement = this.previousElementSibling;
+        
+        if (bioElement.classList.contains('collapsed')) {
+          bioElement.classList.remove('collapsed');
+          bioElement.classList.add('expanded');
+          this.textContent = '收起';
         } else {
-          indicator.classList.remove('active');
+          bioElement.classList.remove('expanded');
+          bioElement.classList.add('collapsed');
+          this.textContent = '查看更多';
         }
       });
+    }
+    
+    // Update indicators
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, index) => {
+      if (index === currentSpeakerIndex) {
+        indicator.classList.add('active');
+      } else {
+        indicator.classList.remove('active');
+      }
+    });
+    
+    // Add touch swipe functionality
+    const speakerCard = speakerCardContainer.querySelector('.speaker-card');
+    if (speakerCard) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      speakerCard.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      
+      speakerCard.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+      
+      function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        const threshold = 50;
+        
+        if (swipeDistance > threshold) {
+          prevButton.click();
+        } else if (swipeDistance < -threshold) {
+          nextButton.click();
+        }
+      }
     }
   }
   
@@ -86,69 +165,14 @@ function initSpeakerCarousel() {
     updateSpeakerDisplay();
   });
   
-  // Indicator clicks
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', function() {
-      currentSpeakerIndex = index;
-      updateSpeakerDisplay();
-    });
-  });
-  
-  // View More button functionality
-  viewMoreButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const bioElement = this.previousElementSibling; // Get the bio paragraph
-      
-      if (bioElement.classList.contains('collapsed')) {
-        // Expand the bio
-        bioElement.classList.remove('collapsed');
-        bioElement.classList.add('expanded');
-        this.textContent = '收起';
-      } else {
-        // Collapse the bio
-        bioElement.classList.remove('expanded');
-        bioElement.classList.add('collapsed');
-        this.textContent = '查看更多';
-      }
-    });
-  });
-  
-  // Touch swipe functionality for mobile
-  const speakerCard = document.querySelector('.speaker-card');
-  if (speakerCard) {
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    speakerCard.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    speakerCard.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-    
-    function handleSwipe() {
-      const swipeDistance = touchEndX - touchStartX;
-      const threshold = 50; // Minimum distance to register as a swipe
-      
-      if (swipeDistance > threshold) {
-        // Swiped right - go to previous slide
-        prevButton.click();
-      } else if (swipeDistance < -threshold) {
-        // Swiped left - go to next slide
-        nextButton.click();
-      }
-    }
-  }
+  // Initialize
+  createIndicators();
+  updateSpeakerDisplay();
   
   // Auto-advance every 6 seconds
   setInterval(function() {
     nextButton.click();
   }, 6000);
-  
-  // Initialize the first slide
-  updateSpeakerDisplay();
 }
 
 function initCountdownTimer() {
