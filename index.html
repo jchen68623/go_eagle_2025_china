@@ -4,17 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>做雄鹰领导力 - 活动日程</title>
-  <link rel="stylesheet" href="styles.css?v=1.0" />
+  <link rel="stylesheet" href="styles.css?v=1.1" />
 </head>
 <body>
   <!-- Mobile Landing Page Overlay -->
   <div id="mobile-landing" class="mobile-landing">
     <div class="mobile-landing-content">
       <div class="landing-image">
-        <!-- The background image will be set in CSS -->
+        <!-- Video container with loading indicator -->
+        <div class="video-container">
+          <div class="loading-indicator">
+            <div class="spinner"></div>
+            <div class="loading-text">加载中...</div>
+          </div>
+          <video id="landing-video" autoplay muted playsinline loop poster="assets/雄鹰领导力mobile背景.png">
+            <source src="assets/landing_page_video.mp4?v=1.0" type="video/mp4">
+          </video>
+        </div>
       </div>
       <div class="landing-text-container">
-        <h1 class="landing-text">开启雄鹰之旅</h1>
+        <div class="text-overlay">
+          <h1 class="landing-text">做雄鹰领导力</h1>
+          <h2 class="landing-subtext">梦想起航之旅</h2>
+        </div>
         <div class="swipe-indicator">
           <div class="swipe-arrow"></div>
           <div class="swipe-text">向上滑动</div>
@@ -61,6 +73,7 @@
               <ul>
                 <li>健身组：Sean</li>
                 <li>瑜伽组： Blair</li>
+                <li><a href="https://v9mf46tq71.feishu.cn/share/base/form/shrcnlOOoEhMLBwtUTPm4xRPGFu" target="_blank"><span class="under-line">点击报名场次>></span></a></li>
               </ul>
             </div>
           </div>

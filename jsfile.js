@@ -41,7 +41,7 @@ function initSpeakerCarousel() {
     {
       name: "陈笑涵Sean&黄宇Blair",
       image: "assets/Sean_Blair.jpg",
-      bio: ""
+      bio: "黄宇与陈笑涵是一对充满创业精神的夫妻。黄宇女士本硕分别毕业于美国印第安纳大学和伊利诺伊大学，现任职于一家世界五十强企业担任项目管理职务。她自本科期间便开始副业创业，成功创造了数倍于主业的被动收入，并即将于今年实现提前退休的目标。陈笑涵先生就读于美国印第安纳大学信息学专业期间便开启创业之旅，大三时副业年流水已近两百万。凭借多年积累，他于28岁时实现提前退休，如今专注于自由生活与团队赋能。两人共同展现了通过副业创业实现财务自由与生活平衡的典范，期待他们分享更多宝贵经验。"
     },
     {
       name: "黄铮Johnny&叶艾琳Irene",
@@ -88,7 +88,7 @@ function initSpeakerCarousel() {
           <h3>${speaker.name}</h3>
           <div class="bio-container">
             <p class="speaker-bio collapsed">${speaker.bio}</p>
-            ${speaker.bio ? '<span class="view-more-btn">查看更多</span>' : ''}
+            ${speaker.bio ? '<span class="view-more-btn under-line">查看更多</span>' : ''}
           </div>
         </div>
       </div>
@@ -229,7 +229,10 @@ function initMobileLanding() {
   // Only show landing page on mobile devices
   if (window.innerWidth < 769) {
     const landingPage = document.getElementById('mobile-landing');
-    if (!landingPage) return;
+    const video = document.getElementById('landing-video');
+    const loadingIndicator = document.querySelector('.loading-indicator');
+    
+    if (!landingPage || !video || !loadingIndicator) return;
     
     let startY, endY;
     
@@ -238,6 +241,24 @@ function initMobileLanding() {
     
     // Prevent scrolling on main content while landing page is visible
     document.body.style.overflow = 'hidden';
+    
+    // Hide loading indicator once video is loaded enough to play
+    video.addEventListener('canplay', function() {
+      loadingIndicator.style.opacity = '0';
+      setTimeout(function() {
+        loadingIndicator.style.display = 'none';
+      }, 500);
+    });
+    
+    // If video takes too long to load or fails, hide loading indicator after 5 seconds
+    setTimeout(function() {
+      if (loadingIndicator.style.display !== 'none') {
+        loadingIndicator.style.opacity = '0';
+        setTimeout(function() {
+          loadingIndicator.style.display = 'none';
+        }, 500);
+      }
+    }, 5000);
     
     // Handle touch events for swipe up detection
     landingPage.addEventListener('touchstart', function(e) {
@@ -268,10 +289,11 @@ function initMobileLanding() {
       landingPage.style.transition = 'opacity 0.5s ease-out';
       landingPage.style.opacity = '0';
       
-      // After animation, hide the landing page
+      // After animation, hide the landing page and pause the video to save resources
       setTimeout(function() {
         landingPage.style.display = 'none';
         document.body.style.overflow = 'auto'; // Enable scrolling on main content
+        video.pause(); // Pause the video when hidden
       }, 500);
     }
     
