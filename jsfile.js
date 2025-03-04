@@ -76,12 +76,10 @@ function initHeaderScrollBehavior() {
 
 function initSpeakerCarousel() {
   // Get carousel elements
-  const prevButton = document.getElementById('prevSpeaker');
-  const nextButton = document.getElementById('nextSpeaker');
   const speakerCardContainer = document.getElementById('speakerCardContainer');
   const indicatorsContainer = document.getElementById('speakerIndicators');
   
-  if (!prevButton || !nextButton || !speakerCardContainer || !indicatorsContainer) return;
+  if (!speakerCardContainer || !indicatorsContainer) return;
   
   // Speaker data
   const speakers = [
@@ -139,63 +137,156 @@ function initSpeakerCarousel() {
     });
   }
   
-  // Create speaker card HTML
+  // Create the multi-card container HTML with previous, current and next cards
+  function updateSpeakerDisplay() {
+    // Clear the container
+    speakerCardContainer.innerHTML = '';
+    
+    // Create a multi-card container
+    const multiCardContainer = document.createElement('div');
+    multiCardContainer.className = 'multi-card-container';
+    speakerCardContainer.appendChild(multiCardContainer);
+    
+    // Calculate indices for previous, current, and next cards
+    const totalSpeakers = speakers.length;
+    const prevIndex = (currentSpeakerIndex - 1 + totalSpeakers) % totalSpeakers;
+    const nextIndex = (currentSpeakerIndex + 1) % totalSpeakers;
+    
+    // Add previous card (left side)
+    const prevCard = createSpeakerCard(speakers[prevIndex]);
+    prevCard.classList.add('prev');
+    multiCardContainer.appendChild(prevCard);
+    
+    // Add current card (center/focused)
+    const currentCard = createSpeakerCard(speakers[currentSpeakerIndex]);
+    currentCard.classList.add('active');
+    multiCardContainer.appendChild(currentCard);
+    
+    // Add next card (right side)
+    const nextCard = createSpeakerCard(speakers[nextIndex]);
+    nextCard.classList.add('next');
+    multiCardContainer.appendChild(nextCard);
+    
+    // Set up event listeners for each card
+    setupCardEventListeners(prevCard, currentCard, nextCard);
+    
+    // Update indicators
+    updateIndicators();
+  }
+  
+  // Create a single speaker card
   function createSpeakerCard(speaker) {
-    return `
-      <div class="speaker-card">
-        <div class="speaker-image">
-          <img src="${speaker.image}" alt="${speaker.name}">
-        </div>
-        <div class="speaker-info">
-          <h3>${speaker.name}</h3>
-          <div class="bio-container">
-            <p class="speaker-bio collapsed">${speaker.bio}</p>
-            ${speaker.bio ? '<span class="view-more-btn under-line">查看更多</span>' : ''}
-          </div>
+    const card = document.createElement('div');
+    card.className = 'speaker-card';
+    
+    card.innerHTML = `
+      <div class="speaker-image">
+        <img src="${speaker.image}" alt="${speaker.name}">
+      </div>
+      <div class="speaker-info">
+        <h3>${speaker.name}</h3>
+        <div class="bio-container">
+          <p class="speaker-bio collapsed">${speaker.bio}</p>
+          ${speaker.bio ? '<span class="view-more-btn under-line">查看更多</span>' : ''}
         </div>
       </div>
     `;
+    
+    return card;
   }
   
-  // Update speaker display
-  function updateSpeakerDisplay() {
-    const currentSpeaker = speakers[currentSpeakerIndex];
+  // Set up event listeners for the cards
+  function setupCardEventListeners(prevCard, currentCard, nextCard) {
+    // Previous card click handler
+    prevCard.addEventListener('click', function() {
+      currentSpeakerIndex = (currentSpeakerIndex - 1 + speakers.length) % speakers.length;
+      updateSpeakerDisplay();
+    });
     
-    // Update speaker card
-    speakerCardContainer.innerHTML = createSpeakerCard(currentSpeaker);
+    // Next card click handler
+    nextCard.addEventListener('click', function() {
+      currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
+      updateSpeakerDisplay();
+    });
     
-    // Add event listener to view more button if it exists
-    const viewMoreBtn = speakerCardContainer.querySelector('.view-more-btn');
+    // View more button handler for the current card
+    const viewMoreBtn = currentCard.querySelector('.view-more-btn');
     if (viewMoreBtn) {
-      viewMoreBtn.addEventListener('click', function() {
+      // Only show on mobile
+      if (window.innerWidth >= 769) {
+        viewMoreBtn.style.display = 'none';
+      }
+      
+      viewMoreBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent the card click from triggering
+        
         const bioElement = this.previousElementSibling;
+        const card = currentCard;
         
         if (bioElement.classList.contains('collapsed')) {
           bioElement.classList.remove('collapsed');
           bioElement.classList.add('expanded');
+          card.classList.add('expanded'); // Add expanded class to the card
           this.textContent = '收起';
           
-          // Check if content is scrollable and add class if needed
+          // Ensure the card is fully visible
           setTimeout(() => {
-            if (bioElement.scrollHeight > bioElement.clientHeight) {
-              bioElement.classList.add('scrollable');
-              
-              // Flash the scrollbar briefly to draw attention
-              bioElement.style.overflow = 'hidden';
-              setTimeout(() => {
-                bioElement.style.overflow = 'auto';
-              }, 300);
+            // Make the card take as much space as needed
+            const cardHeight = card.scrollHeight;
+            card.style.maxHeight = 'none';
+            card.style.height = 'auto';
+            
+            // Reposition the card if needed to ensure it's fully visible
+            if (card.getBoundingClientRect().bottom > window.innerHeight) {
+              window.scrollTo({
+                top: window.scrollY + (card.getBoundingClientRect().bottom - window.innerHeight) + 20,
+                behavior: 'smooth'
+              });
             }
-          }, 10); // Small delay to ensure the expanded height has taken effect
+          }, 50);
         } else {
           bioElement.classList.remove('expanded', 'scrollable');
           bioElement.classList.add('collapsed');
+          card.classList.remove('expanded');
+          card.style.maxHeight = '';
+          card.style.height = '';
           this.textContent = '查看更多';
         }
       });
     }
     
-    // Update indicators
+    // Add touch swipe functionality to all cards
+    const cardContainer = currentCard.parentNode;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    cardContainer.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    cardContainer.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      const threshold = 50;
+      
+      if (swipeDistance > threshold) {
+        // Swipe right - go to previous
+        currentSpeakerIndex = (currentSpeakerIndex - 1 + speakers.length) % speakers.length;
+        updateSpeakerDisplay();
+      } else if (swipeDistance < -threshold) {
+        // Swipe left - go to next
+        currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
+        updateSpeakerDisplay();
+      }
+    }
+  }
+  
+  // Update the indicator dots
+  function updateIndicators() {
     const indicators = document.querySelectorAll('.indicator');
     indicators.forEach((indicator, index) => {
       if (index === currentSpeakerIndex) {
@@ -204,52 +295,12 @@ function initSpeakerCarousel() {
         indicator.classList.remove('active');
       }
     });
-    
-    // Add touch swipe functionality
-    const speakerCard = speakerCardContainer.querySelector('.speaker-card');
-    if (speakerCard) {
-      let touchStartX = 0;
-      let touchEndX = 0;
-      
-      speakerCard.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-      
-      speakerCard.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-      }, { passive: true });
-      
-      function handleSwipe() {
-        const swipeDistance = touchEndX - touchStartX;
-        const threshold = 50;
-        
-        if (swipeDistance > threshold) {
-          prevButton.click();
-        } else if (swipeDistance < -threshold) {
-          nextButton.click();
-        }
-      }
-    }
   }
-  
-  // Previous button click handler
-  prevButton.addEventListener('click', function() {
-    currentSpeakerIndex = (currentSpeakerIndex - 1 + speakers.length) % speakers.length;
-    updateSpeakerDisplay();
-  });
-  
-  // Next button click handler
-  nextButton.addEventListener('click', function() {
-    currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
-    updateSpeakerDisplay();
-  });
   
   // Initialize
   createIndicators();
   updateSpeakerDisplay();
 }
-
 function initCountdownTimer() {
   const daysElement = document.getElementById('countdown-days');
   const hoursElement = document.getElementById('countdown-hours');
