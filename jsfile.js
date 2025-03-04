@@ -45,7 +45,7 @@ function injectHeader() {
       <button class="mobile-menu-close" id="menuClose">✕</button>
       <ul class="menu-items">
         <li><a href="index.html">主页</a></li>
-        <li><a href="preparation.html">活动前准备须知</a></li>
+        <li><a href="preparation.html">活动准备须知</a></li>
       </ul>
     </div>
     <div class="mobile-menu-overlay" id="menuOverlay"></div>
