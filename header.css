@@ -1,27 +1,48 @@
 /* Header styling */
-.minimal-header {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(141, 189, 208, 0.85);
+    backdrop-filter: blur(5px);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     z-index: 100;
-    padding: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .page-header.hidden {
+    transform: translateY(-100%);
+  }
+  
+  .site-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mobile-menu-toggle {
     background: transparent;
     border: none;
-}
-
-.mobile-menu-toggle {
-    background: transparent; /* Completely transparent background */
-    border: none;
-    font-size: 28px; /* Slightly larger for better visibility */
-    padding: 8px 12px;
+    font-size: 24px;
+    padding: 5px;
     color: #fff;
     cursor: pointer;
-    border-radius: 0;
-    box-shadow: none; /* Remove shadow */
-}
-
-/* Mobile menu styling */
-.mobile-menu {
+  }
+  
+  /* Add padding to body to prevent content from being hidden behind fixed header */
+  body {
+    padding-top: 50px;
+  }
+  
+  /* Mobile menu styling */
+  .mobile-menu {
     position: fixed;
     top: 0;
     right: -250px;
@@ -31,13 +52,13 @@
     z-index: 1000;
     transition: right 0.3s ease;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.mobile-menu.active {
+  }
+  
+  .mobile-menu.active {
     right: 0;
-}
-
-.mobile-menu-close {
+  }
+  
+  .mobile-menu-close {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -46,32 +67,32 @@
     font-size: 24px;
     color: #fff;
     cursor: pointer;
-}
-
-.menu-items {
+  }
+  
+  .menu-items {
     padding: 60px 20px 20px;
     list-style: none;
     margin: 0;
-}
-
-.menu-items li {
+  }
+  
+  .menu-items li {
     margin-bottom: 15px;
-}
-
-.menu-items a {
+  }
+  
+  .menu-items a {
     color: #fff;
     text-decoration: none;
     font-size: 1.2em;
     display: block;
     padding: 10px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.menu-items a:hover {
+  }
+  
+  .menu-items a:hover {
     opacity: 0.8;
-}
-
-.mobile-menu-overlay {
+  }
+  
+  .mobile-menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -80,8 +101,8 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
     display: none;
-}
-
-.mobile-menu-overlay.active {
+  }
+  
+  .mobile-menu-overlay.active {
     display: block;
-}
+  }

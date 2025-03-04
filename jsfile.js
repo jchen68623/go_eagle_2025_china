@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inject header
   injectHeader();
 
+  // Setup header scroll behavior
+  initHeaderScrollBehavior();
+  
   // Speaker Carousel
   initSpeakerCarousel();
   
@@ -19,9 +22,18 @@ function injectHeader() {
   const headerContainer = document.getElementById('header-container');
   if (!headerContainer) return;
   
+  // Get page title from the document title or use a default
+  let pageTitle = document.title.replace(' - 做雄鹰领导力', '').replace('做雄鹰领导力 - ', '');
+  
+  // If we're on the homepage, just show the main title
+  if (pageTitle === '主页' || window.location.pathname.endsWith('index.html')) {
+    pageTitle = '做雄鹰领导力';
+  }
+  
   headerContainer.innerHTML = `
-    <!-- Minimal Header with only Hamburger Menu -->
-    <div class="minimal-header">
+    <!-- Page Header -->
+    <div class="page-header" id="pageHeader">
+      <h1 class="site-title">${pageTitle}</h1>
       <button class="mobile-menu-toggle" id="menuToggle">☰</button>
     </div>
     
@@ -35,6 +47,28 @@ function injectHeader() {
     </div>
     <div class="mobile-menu-overlay" id="menuOverlay"></div>
   `;
+}
+
+function initHeaderScrollBehavior() {
+  const header = document.getElementById('pageHeader');
+  if (!header) return;
+  
+  let lastScrollTop = 0;
+  
+  window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // If scrolling down and we're past the header's height
+    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
+      header.classList.add('hidden');
+    } 
+    // If scrolling up
+    else if (scrollTop < lastScrollTop) {
+      header.classList.remove('hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+  }, { passive: true });
 }
 
 function initSpeakerCarousel() {
@@ -211,11 +245,6 @@ function initSpeakerCarousel() {
   // Initialize
   createIndicators();
   updateSpeakerDisplay();
-  
-  // Auto-advance every 6 seconds
-  // setInterval(function() {
-  //   nextButton.click();
-  // }, 6000);
 }
 
 function initCountdownTimer() {
