@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Setup header scroll behavior
   initHeaderScrollBehavior();
+
+  // 
+  initAccordions();
   
   // Speaker Carousel
   initSpeakerCarousel();
@@ -446,6 +449,7 @@ function initMenuToggle() {
   }
 }
 
+// Replace your existing toggleAccordion function in jsfile.js with this
 function toggleAccordion(element) {
   // Toggle arrow direction
   element.classList.toggle('rotate-icon');
@@ -455,4 +459,19 @@ function toggleAccordion(element) {
   
   // Toggle active class
   content.classList.toggle('active');
+  
+  // Add smooth animation
+  if (content.classList.contains('active')) {
+    content.style.maxHeight = content.scrollHeight + "px";
+  } else {
+    content.style.maxHeight = "0px";
+  }
+}
+
+// You may also want to add this initialization function to your existing DOMContentLoaded event listener
+function initAccordions() {
+  // Make sure all active accordions have proper max-height on page load
+  document.querySelectorAll('.accordion-content.active').forEach(function(accordion) {
+    accordion.style.maxHeight = accordion.scrollHeight + "px";
+  });
 }
