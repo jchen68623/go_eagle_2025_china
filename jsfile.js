@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Inject header
+  injectHeader();
+
   // Speaker Carousel
   initSpeakerCarousel();
   
@@ -11,6 +14,28 @@ document.addEventListener('DOMContentLoaded', function() {
   // Menu Toggle for mobile
   initMenuToggle();
 });
+
+function injectHeader() {
+  const headerContainer = document.getElementById('header-container');
+  if (!headerContainer) return;
+  
+  headerContainer.innerHTML = `
+    <!-- Minimal Header with only Hamburger Menu -->
+    <div class="minimal-header">
+      <button class="mobile-menu-toggle" id="menuToggle">☰</button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <button class="mobile-menu-close" id="menuClose">✕</button>
+      <ul class="menu-items">
+        <li><a href="index.html">主页</a></li>
+        <li><a href="preparation.html">活动前准备须知</a></li>
+      </ul>
+    </div>
+    <div class="mobile-menu-overlay" id="menuOverlay"></div>
+  `;
+}
 
 function initSpeakerCarousel() {
   // Get carousel elements
@@ -363,13 +388,33 @@ function initMobileLanding() {
 
 function initMenuToggle() {
   const menuToggle = document.getElementById('menuToggle');
+  const menuClose = document.getElementById('menuClose');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const menuOverlay = document.getElementById('menuOverlay');
+  
   if (!menuToggle) return;
   
   menuToggle.addEventListener('click', function() {
-    // Mobile menu toggle functionality
-    // This can be expanded as needed
-    alert('Menu functionality would go here');
+    if (mobileMenu && menuOverlay) {
+      mobileMenu.classList.add('active');
+      menuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    } else {
+      // Fallback for old functionality
+      alert('Menu functionality would go here');
+    }
   });
+  
+  if (menuClose && mobileMenu && menuOverlay) {
+    function closeMenu() {
+      mobileMenu.classList.remove('active');
+      menuOverlay.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Enable scrolling
+    }
+    
+    menuClose.addEventListener('click', closeMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+  }
 }
 
 function toggleAccordion(element) {
