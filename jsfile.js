@@ -199,8 +199,8 @@ function initSpeakerCarousel() {
   function setupCardEventListeners(prevCard, currentCard, nextCard) {
     // Previous card click handler
     prevCard.addEventListener('click', function() {
-      // Don't change slides if the overlay is active (expanded card is showing)
-      if (document.querySelector('.speaker-overlay.active')) return;
+      // If the current card is expanded, do nothing.
+      if (currentCard.classList.contains('expanded')) return;
       
       currentSpeakerIndex = (currentSpeakerIndex - 1 + speakers.length) % speakers.length;
       updateSpeakerDisplay();
@@ -208,8 +208,8 @@ function initSpeakerCarousel() {
     
     // Next card click handler
     nextCard.addEventListener('click', function() {
-      // Don't change slides if the overlay is active (expanded card is showing)
-      if (document.querySelector('.speaker-overlay.active')) return;
+      // If the current card is expanded, do nothing.
+      if (currentCard.classList.contains('expanded')) return;
       
       currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
       updateSpeakerDisplay();
@@ -224,80 +224,28 @@ function initSpeakerCarousel() {
       }
       
       viewMoreBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); // Prevent the card click from triggering
-        
-        const bioElement = this.previousElementSibling;
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();  // Prevent any other click handlers from firing
+      
         const card = currentCard;
-        
-        if (bioElement.classList.contains('collapsed')) {
-          // Create overlay if it doesn't exist
-          let overlay = document.querySelector('.speaker-overlay');
-          if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'speaker-overlay';
-            document.body.appendChild(overlay);
-            
-            // Add click event to close when clicking outside the card
-            overlay.addEventListener('click', function() {
-              const activeCard = document.querySelector('.speaker-card.active.expanded');
-              if (activeCard) {
-                const closeBtn = activeCard.querySelector('.view-more-btn');
-                if (closeBtn) closeBtn.click();
-              }
-            });
-          }
-          
-          // Expand bio and card
+        const bioElement = card.querySelector('.speaker-bio');
+        console.log("View More clicked; current bio classes:", bioElement.classList);
+      
+        if (!card.classList.contains('expanded')) {
+          // Expand the bio
           bioElement.classList.remove('collapsed');
           bioElement.classList.add('expanded');
           card.classList.add('expanded');
-          overlay.classList.add('active');
-          document.body.style.overflow = 'hidden'; // Prevent background scrolling
           this.textContent = '收起';
-          
-          // Create a close icon if needed
-          if (!card.querySelector('.close-btn')) {
-            const closeBtn = document.createElement('span');
-            closeBtn.className = 'close-btn';
-            closeBtn.innerHTML = '&times;';
-            closeBtn.style.position = 'absolute';
-            closeBtn.style.right = '10px';
-            closeBtn.style.top = '10px';
-            closeBtn.style.fontSize = '24px';
-            closeBtn.style.color = '#fff';
-            closeBtn.style.background = 'rgba(0,0,0,0.5)';
-            closeBtn.style.borderRadius = '50%';
-            closeBtn.style.width = '30px';
-            closeBtn.style.height = '30px';
-            closeBtn.style.display = 'flex';
-            closeBtn.style.alignItems = 'center';
-            closeBtn.style.justifyContent = 'center';
-            closeBtn.style.cursor = 'pointer';
-            closeBtn.style.zIndex = '10';
-            
-            closeBtn.addEventListener('click', (e) => {
-              e.stopPropagation();
-              viewMoreBtn.click();
-            });
-            
-            card.querySelector('.speaker-image').appendChild(closeBtn);
-          }
         } else {
-          // Collapse bio and card
+          // Collapse the bio
           bioElement.classList.remove('expanded', 'scrollable');
           bioElement.classList.add('collapsed');
           card.classList.remove('expanded');
-          
-          // Remove overlay
           const overlay = document.querySelector('.speaker-overlay');
           if (overlay) overlay.classList.remove('active');
-          
-          document.body.style.overflow = 'auto'; // Re-enable scrolling
           this.textContent = '查看更多';
-          
-          // Remove close button if it exists
-          const closeBtn = card.querySelector('.close-btn');
-          if (closeBtn) closeBtn.remove();
         }
       });
     }
@@ -323,15 +271,16 @@ function initSpeakerCarousel() {
     }, { passive: true });
     
     function handleSwipe() {
+      // If the current card is expanded, ignore swipes.
+      if (currentCard.classList.contains('expanded')) return;
+    
       const swipeDistance = touchEndX - touchStartX;
       const threshold = 50;
       
       if (swipeDistance > threshold) {
-        // Swipe right - go to previous
         currentSpeakerIndex = (currentSpeakerIndex - 1 + speakers.length) % speakers.length;
         updateSpeakerDisplay();
       } else if (swipeDistance < -threshold) {
-        // Swipe left - go to next
         currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
         updateSpeakerDisplay();
       }

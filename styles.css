@@ -693,6 +693,14 @@ section h2 .subtitle {
     overflow-y: auto;
     padding-right: 10px;
   }
+  
+  /* When expanded, allow the bio to show fully */
+  .speaker-bio.expanded {
+    max-height: none;
+    height: auto;
+    overflow: visible;
+    padding-right: 10px;
+  }
 
   /* When bio is expanded, card needs to adjust */
   .speaker-card.active .speaker-bio.expanded {
