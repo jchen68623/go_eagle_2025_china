@@ -736,14 +736,11 @@ section h2 .subtitle {
   }
   
   /* Navigation arrows */
-  .prev-arrow {
-    left: -10px;
-  }
-  
+  .prev-arrow,
   .next-arrow {
-    right: -10px;
+    display: none;
   }
-  
+
   /* Indicators at bottom */
   .speaker-indicators {
     margin-top: auto;
