@@ -702,10 +702,57 @@ section h2 .subtitle {
   
   /* Make sure the entire card content is visible when expanded */
   .speaker-card.active.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 400px;
+    max-height: 90vh;
     height: auto;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Make the bio scrollable */
+  .speaker-card.active.expanded .speaker-info {
+    max-height: calc(90vh - 200px);
+    overflow-y: auto;
+  }
+
+  /* Style the expanded bio */
+  .speaker-card.active.expanded .speaker-bio.expanded {
     max-height: none;
-    overflow: visible;
-    z-index: 20;
+    height: auto;
+    padding-bottom: 40px; /* Space for the collapse button */
+  }
+
+  /* Add overlay to prevent clicking on other elements */
+  .speaker-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+  }
+  
+  .speaker-overlay.active {
+    display: block;
+  }
+
+  .speaker-card.active.expanded .view-more-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(107, 152, 191);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
   .speaker-bio.expanded::-webkit-scrollbar {

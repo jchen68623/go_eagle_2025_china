@@ -199,12 +199,18 @@ function initSpeakerCarousel() {
   function setupCardEventListeners(prevCard, currentCard, nextCard) {
     // Previous card click handler
     prevCard.addEventListener('click', function() {
+      // Don't change slides if the overlay is active (expanded card is showing)
+      if (document.querySelector('.speaker-overlay.active')) return;
+      
       currentSpeakerIndex = (currentSpeakerIndex - 1 + speakers.length) % speakers.length;
       updateSpeakerDisplay();
     });
     
     // Next card click handler
     nextCard.addEventListener('click', function() {
+      // Don't change slides if the overlay is active (expanded card is showing)
+      if (document.querySelector('.speaker-overlay.active')) return;
+      
       currentSpeakerIndex = (currentSpeakerIndex + 1) % speakers.length;
       updateSpeakerDisplay();
     });
@@ -224,33 +230,74 @@ function initSpeakerCarousel() {
         const card = currentCard;
         
         if (bioElement.classList.contains('collapsed')) {
+          // Create overlay if it doesn't exist
+          let overlay = document.querySelector('.speaker-overlay');
+          if (!overlay) {
+            overlay = document.createElement('div');
+            overlay.className = 'speaker-overlay';
+            document.body.appendChild(overlay);
+            
+            // Add click event to close when clicking outside the card
+            overlay.addEventListener('click', function() {
+              const activeCard = document.querySelector('.speaker-card.active.expanded');
+              if (activeCard) {
+                const closeBtn = activeCard.querySelector('.view-more-btn');
+                if (closeBtn) closeBtn.click();
+              }
+            });
+          }
+          
+          // Expand bio and card
           bioElement.classList.remove('collapsed');
           bioElement.classList.add('expanded');
-          card.classList.add('expanded'); // Add expanded class to the card
+          card.classList.add('expanded');
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Prevent background scrolling
           this.textContent = '收起';
           
-          // Ensure the card is fully visible
-          setTimeout(() => {
-            // Make the card take as much space as needed
-            const cardHeight = card.scrollHeight;
-            card.style.maxHeight = 'none';
-            card.style.height = 'auto';
+          // Create a close icon if needed
+          if (!card.querySelector('.close-btn')) {
+            const closeBtn = document.createElement('span');
+            closeBtn.className = 'close-btn';
+            closeBtn.innerHTML = '&times;';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.right = '10px';
+            closeBtn.style.top = '10px';
+            closeBtn.style.fontSize = '24px';
+            closeBtn.style.color = '#fff';
+            closeBtn.style.background = 'rgba(0,0,0,0.5)';
+            closeBtn.style.borderRadius = '50%';
+            closeBtn.style.width = '30px';
+            closeBtn.style.height = '30px';
+            closeBtn.style.display = 'flex';
+            closeBtn.style.alignItems = 'center';
+            closeBtn.style.justifyContent = 'center';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.zIndex = '10';
             
-            // Reposition the card if needed to ensure it's fully visible
-            if (card.getBoundingClientRect().bottom > window.innerHeight) {
-              window.scrollTo({
-                top: window.scrollY + (card.getBoundingClientRect().bottom - window.innerHeight) + 20,
-                behavior: 'smooth'
-              });
-            }
-          }, 50);
+            closeBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              viewMoreBtn.click();
+            });
+            
+            card.querySelector('.speaker-image').appendChild(closeBtn);
+          }
         } else {
+          // Collapse bio and card
           bioElement.classList.remove('expanded', 'scrollable');
           bioElement.classList.add('collapsed');
           card.classList.remove('expanded');
-          card.style.maxHeight = '';
-          card.style.height = '';
+          
+          // Remove overlay
+          const overlay = document.querySelector('.speaker-overlay');
+          if (overlay) overlay.classList.remove('active');
+          
+          document.body.style.overflow = 'auto'; // Re-enable scrolling
           this.textContent = '查看更多';
+          
+          // Remove close button if it exists
+          const closeBtn = card.querySelector('.close-btn');
+          if (closeBtn) closeBtn.remove();
         }
       });
     }
@@ -261,10 +308,16 @@ function initSpeakerCarousel() {
     let touchEndX = 0;
     
     cardContainer.addEventListener('touchstart', function(e) {
+      // Don't allow swiping if overlay is active
+      if (document.querySelector('.speaker-overlay.active')) return;
+      
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
     
     cardContainer.addEventListener('touchend', function(e) {
+      // Don't allow swiping if overlay is active
+      if (document.querySelector('.speaker-overlay.active')) return;
+      
       touchEndX = e.changedTouches[0].screenX;
       handleSwipe();
     }, { passive: true });
