@@ -997,6 +997,10 @@ section h2 .subtitle {
     max-height: none;
     overflow: visible;
   }
+
+  .view-more-btn {
+    display: none;
+  }
   
   .nav-arrow {
     width: 45px;
