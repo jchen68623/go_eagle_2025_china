@@ -354,6 +354,7 @@ function initSpeakerCarousel() {
   createIndicators();
   updateSpeakerDisplay();
 }
+
 function initCountdownTimer() {
   const daysElement = document.getElementById('countdown-days');
   const hoursElement = document.getElementById('countdown-hours');

@@ -708,10 +708,10 @@ section h2 .subtitle {
     transform: translate(-50%, -50%);
     width: 90%;
     max-width: 400px;
-    max-height: 95vh;
+    max-height: 90vh;
     height: auto;
     z-index: 1000;
-    overflow: hidden;
+    overflow: auto;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
   }
 
