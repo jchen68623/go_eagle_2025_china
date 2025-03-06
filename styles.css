@@ -660,13 +660,14 @@ section h2 .subtitle {
     margin-bottom: 20px; /* Space for the button */
   }
 
-  /* Default bio text style */
+  /* Add smooth transition effects to bio */
   .speaker-bio {
     color: rgb(116, 126, 134);
     line-height: 1.6;
     margin: 0;
     overflow: hidden;
-    position: relative; /* Ensure position is set for all states */
+    position: relative;
+    transition: max-height 0.3s ease; /* Simple height transition */
   }
   
   /* Style when bio is collapsed */
@@ -682,22 +683,22 @@ section h2 .subtitle {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60px; /* Height of fade effect */
+    height: 60px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     pointer-events: none;
+    transition: opacity 0.3s ease; /* Fade transition */
   }
   
   /* Style when bio is expanded - explicitly remove the ::after element */
   .speaker-bio.expanded {
-    height: auto;
     max-height: 300px;
     overflow-y: auto;
     padding-right: 10px;
   }
 
-  /* Explicitly remove the after element when expanded */
+  /* Hide the fade when expanded */
   .speaker-bio.expanded::after {
-    display: none;
+    opacity: 0;
   }
   
   /* Scrollbar styling */
@@ -715,7 +716,7 @@ section h2 .subtitle {
     border-radius: 10px;
   }
   
-  /* View more button styling */
+  /* Simple button transition */
   .view-more-btn {
     display: inline-block;
     color: rgb(107, 152, 191);
@@ -723,9 +724,15 @@ section h2 .subtitle {
     cursor: pointer;
     font-size: 0.9em;
     position: absolute;
-    bottom: -20px; /* Position below bio text */
+    bottom: -20px;
     left: 0;
     text-decoration: underline;
+    transition: transform 0.1s ease; /* Quick feedback on click */
+  }
+  
+  /* Simple click effect */
+  .view-more-btn:active {
+    transform: translateY(1px);
   }
   
   /* Navigation arrows */
