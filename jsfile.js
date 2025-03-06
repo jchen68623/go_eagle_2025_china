@@ -150,7 +150,7 @@ function initSpeakerCarousel() {
           <h3>${speaker.name}</h3>
           <div class="bio-container">
             <p class="speaker-bio collapsed">${speaker.bio}</p>
-            ${speaker.bio ? '<span class="view-more-btn under-line">查看更多</span>' : ''}
+            ${speaker.bio ? '<span class="view-more-btn">查看更多</span>' : ''}
           </div>
         </div>
       </div>
@@ -164,37 +164,47 @@ function initSpeakerCarousel() {
     // Update speaker card
     speakerCardContainer.innerHTML = createSpeakerCard(currentSpeaker);
     
-    // Add event listener to view more button if it exists
+    // Updated view more button functionality
     const viewMoreBtn = speakerCardContainer.querySelector('.view-more-btn');
     if (viewMoreBtn) {
       viewMoreBtn.addEventListener('click', function() {
         const bioElement = this.previousElementSibling;
         
         if (bioElement.classList.contains('collapsed')) {
+          // Expanding bio
           bioElement.classList.remove('collapsed');
           bioElement.classList.add('expanded');
           this.textContent = '收起';
           
-          // Check if content is scrollable and add class if needed
+          // Position button at bottom when expanded
+          this.style.position = 'relative';
+          this.style.bottom = 'auto';
+          this.style.marginTop = '10px';
+          
+          // Ensure no fade effect
           setTimeout(() => {
-            if (bioElement.scrollHeight > bioElement.clientHeight) {
-              bioElement.classList.add('scrollable');
-              
-              // Flash the scrollbar briefly to draw attention
-              bioElement.style.overflow = 'hidden';
-              setTimeout(() => {
-                bioElement.style.overflow = 'auto';
-              }, 300);
-            }
-          }, 10); // Small delay to ensure the expanded height has taken effect
+            bioElement.style.opacity = 1;
+          }, 10);
+          
         } else {
-          bioElement.classList.remove('expanded', 'scrollable');
-          bioElement.classList.add('collapsed');
+          // Collapsing bio
+          bioElement.classList.remove('expanded');
+          
+          // Small delay before adding collapsed class to ensure clean transition
+          setTimeout(() => {
+            bioElement.classList.add('collapsed');
+          }, 10);
+          
           this.textContent = '查看更多';
+          
+          // Reset button position
+          this.style.position = 'absolute';
+          this.style.bottom = '-20px';
+          this.style.marginTop = '0';
         }
       });
     }
-    
+
     // Update indicators
     const indicators = document.querySelectorAll('.indicator');
     indicators.forEach((indicator, index) => {
