@@ -708,7 +708,7 @@ section h2 .subtitle {
     transform: translate(-50%, -50%);
     width: 90%;
     max-width: 400px;
-    max-height: 90vh;
+    max-height: 95vh;
     height: auto;
     z-index: 1000;
     overflow: hidden;
