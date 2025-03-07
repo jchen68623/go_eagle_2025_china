@@ -99,6 +99,18 @@ section h2 .subtitle {
   color: #fff;
 }
 
+/* Venue label styling */
+.venue-label {
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: normal;
+  background-color: rgba(255, 255, 255, 0.3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
 .day-activities {
   font-size: 1em;
   line-height: 1.6;
@@ -156,11 +168,29 @@ section h2 .subtitle {
   padding: 0;
 }
 
-.time-block-details li {
+/* Better time alignment for schedule items */
+.time-block-details ul li {
+  display: flex;
+  align-items: flex-start;
   margin-bottom: 8px;
-  color: rgb(107, 152, 191);
   position: relative;
-  padding-left: 0;
+  color: rgb(107, 152, 191);
+}
+
+.time-block-details ul li::before {
+  content: "";
+  display: none; /* Remove default bullet */
+}
+
+.schedule-time {
+  min-width: 141.4px; /* Fixed width for time column */
+  flex-shrink: 0;
+  text-align: left;
+  padding-right: 10px;
+}
+
+.schedule-description {
+  flex-grow: 1;
 }
 
 .toggle-icon {
@@ -611,6 +641,20 @@ section h2 .subtitle {
 
 /* Mobile Specific Styles */
 @media (max-width: 768px) {
+  .day-header {
+    flex-wrap: wrap;
+  }
+  
+  .day-name {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .venue-label {
+    margin-top: 4px;
+  }
+
   /* Speaker section styles */
   .speakers-section {
     min-height: 100vh;
@@ -934,12 +978,6 @@ section h2 .subtitle {
   .day-activities li {
     padding: 8px 0;
     color: #fff;
-  }
-  
-  /* Better spacing on day header */
-  .day-header {
-    padding: 12px 15px;
-    margin-bottom: 20px;
   }
   
   /* Enhanced accordion behavior */
